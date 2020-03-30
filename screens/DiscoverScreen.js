@@ -5,23 +5,26 @@ import {
   ScrollView,
   StyleSheet,
   View,
-  Button
+  Button,
+  Text,
+  SafeAreaView
 } from 'react-native';
+import Constants from 'expo-constants';
+import { Input } from 'react-native-elements';
+
+import CategoryTile from '../components/CategoryTile'
 
 export default function DiscoverScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.textHeading}>Discover Businesses</Text>
+      <Input placeholder="Search for a business" />
+      <Text style={styles.textHeading}>Categories</Text>
       <View style={styles.welcomeContainer}>
-        <Image
-          source={
-            __DEV__
-              ? require('../assets/images/ctc_logo.png')
-              : require('../assets/images/ctc_logo.png')
-          }
-          style={styles.welcomeImage}
-        />
+        {/* TODO: Insert all tiles and style properly */}
+        <CategoryTile />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -33,9 +36,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    marginTop: Constants.statusBarHeight,
+    padding: 10,
   },
   contentContainer: {
     // paddingTop: 50,
+  },
+  textHeading: {
+    fontSize: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
