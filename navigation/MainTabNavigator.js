@@ -7,6 +7,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import AboutScreen from '../screens/AboutScreen';
+import SearchResultsScreen from '../screens/SearchResultsScreen';
 
 const config = Platform.select({
   default: {},
@@ -14,6 +15,7 @@ const config = Platform.select({
 
 const DiscoverStack = createStackNavigator(
   {
+    SearchResults: SearchResultsScreen,
     Details: DetailsScreen,
     Discover: DiscoverScreen,
   },
