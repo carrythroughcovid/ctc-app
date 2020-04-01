@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen';
+import DetailsScreen from '../screens/DetailsScreen';
 import AboutScreen from '../screens/AboutScreen';
 
 const config = Platform.select({
@@ -13,6 +14,7 @@ const config = Platform.select({
 
 const DiscoverStack = createStackNavigator(
   {
+    Details: DetailsScreen,
     Discover: DiscoverScreen,
   },
   config
