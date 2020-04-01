@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
 import { Button } from 'react-native-elements';
+import { dummyBusiness } from "../dummy_data/businesses"
 
-export default function DetailsScreen({ navigation }) {
+export default function DetailsScreen({ navigation, business = dummyBusiness }) {
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.headerImage} source={{ uri: 'https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg' }} />
@@ -10,8 +11,8 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.titleContainer}>
           <Image style={styles.logoImage} source={{ uri: 'https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png' }} />
           <View style={styles.titleDetailsContainer}>
-            <Text style={styles.title}>Danny's Burgers</Text>
-            <Text style={styles.subTitle}>Food Delivery</Text>
+            <Text style={styles.title}>{business.name}</Text>
+            <Text style={styles.subTitle}>{business.categories[0].name} / {business.suburb}</Text>
           </View>
         </View>
         <Button title="Website" buttonStyle={styles.actionButton} />
