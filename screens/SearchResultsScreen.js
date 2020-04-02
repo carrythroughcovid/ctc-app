@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { Input } from 'react-native-elements';
 
 import ResultTile from "../components/ResultTile"
@@ -23,13 +23,17 @@ export default function SearchResultsScreen({ navigation }) {
         <Text style={styles.resultsText}>{businesses.length} results</Text>
         {businesses.length > 0 &&
           businesses.map(({ name, categories, suburb, id }) => (
-            <View style={styles.result} key={id}>
+            <TouchableOpacity
+              style={styles.result}
+              key={id}
+              onPress={() => navigation.navigate("Details")}
+            >
               <ResultTile
                 name={name}
                 category={categories[0].name}
                 suburb={suburb}
               />
-            </View>
+            </TouchableOpacity>
           ))}
       </View>
     </ScrollView>
