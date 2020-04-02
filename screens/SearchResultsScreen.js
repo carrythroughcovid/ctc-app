@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Picker,
   StyleSheet,
   Text,
   View,
@@ -16,16 +15,26 @@ export default function SearchResultsScreen({ navigation, route }) {
   const { searchInput } = route.params;
   const [businesses, setBusinesses] = useState([]);
 
+  const servicesPlaceholder = {
+    label: "All services",
+    value: null,
+    color: "#3F3356"
+  };
+
+  const categoryPlaceholder = {
+    label: "All categories",
+    value: null,
+    color: "#3F3356"
+  };
+
   const servicesData = [
-    { label: "Football", value: "football" },
-    { label: "Baseball", value: "baseball" },
-    { label: "Hockey", value: "hockey" }
+    { label: "Service 1", value: "service-1" },
+    { label: "Service 2", value: "service-2" }
   ];
 
   const categoryData = [
-    { label: "Football", value: "football" },
-    { label: "Baseball", value: "baseball" },
-    { label: "Hockey", value: "hockey" }
+    { label: "Category 1", value: "category-1" },
+    { label: "Category 2", value: "category-2" }
   ];
 
   useEffect(() => {
@@ -49,12 +58,14 @@ export default function SearchResultsScreen({ navigation, route }) {
             <RNPickerSelect
               onValueChange={value => console.log(value)}
               items={servicesData}
+              placeholder={servicesPlaceholder}
             />
           </View>
           <View style={styles.dropDown}>
             <RNPickerSelect
               onValueChange={value => console.log(value)}
               items={categoryData}
+              placeholder={categoryPlaceholder}
             />
           </View>
         </View>
