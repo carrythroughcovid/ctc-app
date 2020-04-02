@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView
+  SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import { Input, Divider } from 'react-native-elements';
 
@@ -17,20 +18,28 @@ export default function DiscoverScreen({ navigation }) {
       <ScrollView style={styles.scrollContainer}>
         <Input
           placeholder="Search by location or business name"
-          onSubmitEditing={event => navigation.navigate("SearchResults", {
-            searchInput: event.nativeEvent.text
-          })}
+          onSubmitEditing={event =>
+            navigation.navigate("SearchResults", {
+              searchInput: event.nativeEvent.text
+            })
+          }
         />
         <Divider style={styles.divider} />
         <Text style={styles.sectionTitle}>TAKE A BROWSE</Text>
         <Text style={styles.textHeading}>Explore Categories</Text>
-        <View style={styles.categoryContainer}>
+        <TouchableOpacity style={styles.categoryContainer}>
           {categories.map(({ name, iconUrl }, i) => (
-            <View key={i} style={styles.categoryTile}>
+            <View
+              key={i}
+              style={styles.categoryTile}
+              onPress={() =>
+                navigation.navigate("SearchResults", { category: name })
+              }
+            >
               <CategoryTile iconUrl={iconUrl} category={name} />
             </View>
           ))}
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
