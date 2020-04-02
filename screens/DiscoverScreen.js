@@ -1,29 +1,32 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   View,
-  Button,
   Text,
   SafeAreaView
 } from 'react-native';
-import Constants from 'expo-constants';
-import { Input } from 'react-native-elements';
+import { Input, Divider } from 'react-native-elements';
 
 import CategoryTile from '../components/CategoryTile'
+import { categories } from "../data/categories"
 
-export default function DiscoverScreen({ navigation }) {
+export default function DiscoverScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.textHeading}>Discover Businesses</Text>
-      <Input placeholder="Search for a business" />
-      <Text style={styles.textHeading}>Categories</Text>
-      <View style={styles.welcomeContainer}>
-        {/* TODO: Insert all tiles and style properly */}
-        <CategoryTile />
-      </View>
+      <ScrollView style={styles.scrollContainer}>
+        <Input placeholder="Search by location or business name" />
+        <Divider style={styles.divider} />
+        <Text style={styles.sectionTitle}>TAKE A BROWSE</Text>
+        <Text style={styles.textHeading}>Explore Categories</Text>
+        <View style={styles.categoryContainer}>
+          {categories.map(({ name, iconUrl }, i) => (
+            <View key={i} style={styles.categoryTile}>
+              <CategoryTile iconUrl={iconUrl} category={name} />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -36,47 +39,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: Constants.statusBarHeight,
-    padding: 10,
   },
-  contentContainer: {
-    // paddingTop: 50,
+  scrollContainer: {
+    padding: 20,
   },
   textHeading: {
-    fontSize: 30,
+    fontSize: 25,
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
+  sectionTitle: {
+    color: '#9060EB',
+    fontWeight: "bold",
+    paddingTop: 15,
+    paddingBottom: 5,
+  },
+  divider: {
+    marginTop: 20,
     marginBottom: 20,
-    justifyContent: 'center',
-    height: '100%',
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  categoryContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 3,
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+  categoryTile: {
+    paddingTop: 20,
+    width: '48%',
   }
 });

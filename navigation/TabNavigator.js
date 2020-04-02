@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import DiscoverScreen from '../screens/DiscoverScreen';
 import SearchResultsScreen from '../screens/SearchResultsScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import AboutScreen from '../screens/AboutScreen';
@@ -12,6 +13,7 @@ const DiscoverStack = createStackNavigator();
 function DiscoverStackScreen() {
   return (
     <DiscoverStack.Navigator>
+      <DiscoverStack.Screen name="Discover" component={DiscoverScreen} />
       <DiscoverStack.Screen name="SearchResults" component={SearchResultsScreen} />
       <DiscoverStack.Screen name="Details" component={DetailsScreen} />
     </DiscoverStack.Navigator>

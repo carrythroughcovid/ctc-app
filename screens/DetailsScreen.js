@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
 import { Button } from 'react-native-elements';
-import { dummyBusiness } from "../dummy_data/businesses"
+import { dummyBusiness } from "../data/businesses"
 import { capitalize } from "lodash";
 
 export default function DetailsScreen({ route }) {
