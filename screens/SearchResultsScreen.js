@@ -4,12 +4,13 @@ import { Input } from 'react-native-elements';
 
 import ResultTile from "../components/ResultTile"
 
-export default function SearchResultsScreen({ navigation }) {
+export default function SearchResultsScreen({ navigation, route }) {
+  const { searchInput } = route.params
   const [businesses, setBusinesses] = useState([])
 
   useEffect(() => {
     const fetchBusinesses = async () => {
-      const results = await fetch('https://carrythroughcovid.herokuapp.com/api/v1/business')
+      const results = await fetch(` https://carrythroughcovid.herokuapp.com/api/v1/business?input=${searchInput}` )
       const parsed = await results.json()
       setBusinesses(parsed)
     }

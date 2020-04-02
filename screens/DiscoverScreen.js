@@ -11,11 +11,16 @@ import { Input, Divider } from 'react-native-elements';
 import CategoryTile from '../components/CategoryTile'
 import { categories } from "../data/categories"
 
-export default function DiscoverScreen() {
+export default function DiscoverScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-        <Input placeholder="Search by location or business name" />
+        <Input
+          placeholder="Search by location or business name"
+          onSubmitEditing={event => navigation.navigate("SearchResults", {
+            searchInput: event.nativeEvent.text
+          })}
+        />
         <Divider style={styles.divider} />
         <Text style={styles.sectionTitle}>TAKE A BROWSE</Text>
         <Text style={styles.textHeading}>Explore Categories</Text>
