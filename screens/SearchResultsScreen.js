@@ -10,7 +10,7 @@ export default function SearchResultsScreen({ navigation, route }) {
 
   useEffect(() => {
     const fetchBusinesses = async () => {
-      const results = await fetch(` https://carrythroughcovid.herokuapp.com/api/v1/business?input=${searchInput}` )
+      const results = await fetch(`https://carrythroughcovid.herokuapp.com/api/v1/business?input=${searchInput}`)
       const parsed = await results.json()
       setBusinesses(parsed)
     }
