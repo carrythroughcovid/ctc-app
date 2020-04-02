@@ -22,16 +22,16 @@ export default function SearchResultsScreen({ navigation }) {
         <Input placeholder="Search for a business" />
         <Text style={styles.resultsText}>{businesses.length} results</Text>
         {businesses.length > 0 &&
-          businesses.map(({ name, categories, suburb, id }) => (
+          businesses.map(business => (
             <TouchableOpacity
               style={styles.result}
-              key={id}
-              onPress={() => navigation.navigate("Details")}
+              key={business.id}
+              onPress={() => navigation.navigate("Details", { business })}
             >
               <ResultTile
-                name={name}
-                category={categories[0].name}
-                suburb={suburb}
+                name={business.name}
+                category={business.categories[0].name}
+                suburb={business.suburb}
               />
             </TouchableOpacity>
           ))}
