@@ -1,26 +1,35 @@
 import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet } from 'react-native';
 
-const image = { uri: "https://i2.wp.com/oldpodcast.com/wp-content/uploads/2019/08/healthy_food.jpg" }
+const CategoryTile = ({ iconUrl, category }) => {
+  const image = { uri: iconUrl }
 
-const CategoryTile = () => (
-  <View style={styles.container}>
-    <ImageBackground source={image} style={styles.image} />
-    <Text style={styles.text}>Health and Fitness</Text>
-  </View>
-);
+  return (
+    <View style={styles.container}>
+      <Image source={image} style={styles.image} />
+      <Text style={styles.text}>{category}</Text>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: "black",
-    borderWidth: 2,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    overflow: 'hidden',
+    elevation: 5,
+    backgroundColor: 'white',
+    height: 200,
+    width: '100%',
   },
   image: {
-    resizeMode: "cover",
-    minHeight: 100,
+    width: 50,
+    height: 50,
   },
   text: {
-    padding: 20,
+    paddingTop: 20,
   }
 })
 

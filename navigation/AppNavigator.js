@@ -2,7 +2,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 // import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 // import SignInScreen from '../screens/SignInScreen';
 
-import MainTabNavigator from './MainTabNavigator';
+import TabNavigator from './TabNavigator';
 
 export default createAppContainer(
   createSwitchNavigator(
@@ -10,7 +10,7 @@ export default createAppContainer(
       // TODO: Implement auth when backend is ready
       // AuthLoading: AuthLoadingScreen,
       // Auth: SignInScreen,
-      Main: MainTabNavigator,
+      Main: TabNavigator,
     },
     {
       // TODO: Switch to AuthLoading when backend is ready

@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
 import { Button } from 'react-native-elements';
-import { dummyBusiness } from "../dummy_data/businesses"
+import { dummyBusiness } from "../data/businesses"
+import { capitalize } from "lodash";
 
-export default function DetailsScreen({ navigation, business = dummyBusiness }) {
+export default function DetailsScreen({ route }) {
+  const { business } = route.params
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.headerImage} source={{ uri: 'https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg' }} />
@@ -12,7 +14,7 @@ export default function DetailsScreen({ navigation, business = dummyBusiness }) 
           <Image style={styles.logoImage} source={{ uri: 'https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png' }} />
           <View style={styles.titleDetailsContainer}>
             <Text style={styles.title}>{business.name}</Text>
-            <Text style={styles.subTitle}>{business.categories[0].name} / {business.suburb}</Text>
+            <Text style={styles.subTitle}>{capitalize(business.categories[0].name)} / {business.suburb}</Text>
           </View>
         </View>
         <Button title="Website" buttonStyle={styles.actionButton} />
@@ -21,7 +23,7 @@ export default function DetailsScreen({ navigation, business = dummyBusiness }) 
         <View>
           <Text style={styles.sectionTitle}>CURRENT SERVICES</Text>
           <Text style={styles.sectionParagraph}>
-            TBC
+            {business.offerings.map(offering => capitalize(offering.name)).join(", ")}
           </Text>
         </View>
         <View>

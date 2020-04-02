@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { Input } from 'react-native-elements';
 
 import ResultTile from "../components/ResultTile"
 
-export default function SearchResultsScreen({ navigation }) {
+export default function SearchResultsScreen({ navigation, route }) {
+  const { searchInput } = route.params
   const [businesses, setBusinesses] = useState([])
 
   useEffect(() => {
     const fetchBusinesses = async () => {
-      const results = await fetch('https://carrythroughcovid.herokuapp.com/api/v1/business')
+      const results = await fetch(`https://carrythroughcovid.herokuapp.com/api/v1/business?input=${searchInput}`)
       const parsed = await results.json()
       setBusinesses(parsed)
     }
@@ -22,14 +23,18 @@ export default function SearchResultsScreen({ navigation }) {
         <Input placeholder="Search for a business" />
         <Text style={styles.resultsText}>{businesses.length} results</Text>
         {businesses.length > 0 &&
-          businesses.map(({ name, categories, suburb, id }) => (
-            <View style={styles.result} key={id}>
+          businesses.map(business => (
+            <TouchableOpacity
+              style={styles.result}
+              key={business.id}
+              onPress={() => navigation.navigate("Details", { business })}
+            >
               <ResultTile
-                name={name}
-                category={categories[0].name}
-                suburb={suburb}
+                name={business.name}
+                category={business.categories[0].name}
+                suburb={business.suburb}
               />
-            </View>
+            </TouchableOpacity>
           ))}
       </View>
     </ScrollView>
