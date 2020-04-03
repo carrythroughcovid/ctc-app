@@ -17,22 +17,15 @@ import ResultTile from "../components/ResultTile";
 export default function SearchResultsScreen({ navigation, route }) {
   const { searchInput } = route.params;
   const [businesses, setBusinesses] = useState([]);
-
-  const categoryPlaceholder = {
-    label: "All categories",
-    value: null
-  };
+  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const categoryData = [
-    { label: "Hospitality", value: "category-hospitality" },
-    { label: "Retail", value: "category-retail" },
-    { label: "Health and Wellbeing", value: "category-health-wellbeing" }
+    { label: "Hospitality", value: "hospitality" },
+    { label: "Retail", value: "retail" },
+    { label: "Health and Wellbeing", value: "health-wellbeing" },
+    { label: "Services", value: "services" },
+    { label: "Other", value: "other" }
   ];
-
-  const nearestToMePlaceholder = {
-    label: "Nearest to me",
-    value: "nearest-to-me"
-  };
 
   const nearestToMeData = [{ label: "Date added", value: "date-added" }];
 
@@ -43,25 +36,16 @@ export default function SearchResultsScreen({ navigation, route }) {
       );
       const parsed = await results.json();
       setBusinesses(parsed);
+      setFilteredBusinesses(parsed);
     };
     fetchBusinesses();
   }, [setBusinesses]);
 
-  const dummyData = [
-    { name: "Example Hospitality Option 1", category: "category-hospitality" },
-    { name: "Example Hospitality Option 2", category: "category-hospitality" },
-    { name: "Example Retail Option 1", category: "category-retail" },
-    { name: "Example Retail Option 2", category: "category-retail" }
-  ];
-
-  const [categories, setCategories] = useState(dummyData);
-
-  // Change the displayed categories to the one the user selected
   const handleCategoryChange = selectedCategory => {
-    const categories = dummyData.filter(
-      item => item.category == selectedCategory
+    const filtered = businesses.filter(
+      business => business.categories[0].name == selectedCategory
     );
-    setCategories(categories);
+    setFilteredBusinesses(filtered);
   };
 
   return (
@@ -74,7 +58,7 @@ export default function SearchResultsScreen({ navigation, route }) {
               style={pickerSelectStyles}
               onValueChange={e => handleCategoryChange(e)}
               items={categoryData}
-              placeholder={categoryPlaceholder}
+              placeholder={{ label: "All categories", value: null }}
               placeholderTextColor="#3F3356"
               Icon={() => {
                 return <FontAwesomeIcon icon={faSortDown} color={"#3F3356"} />;
@@ -86,7 +70,7 @@ export default function SearchResultsScreen({ navigation, route }) {
               style={pickerSelectStyles}
               onValueChange={value => console.log(value)}
               items={nearestToMeData}
-              placeholder={nearestToMePlaceholder}
+              placeholder={{ label: "Nearest to me", value: "nearest-to-me" }}
               placeholderTextColor="#3F3356"
               Icon={() => {
                 return <FontAwesomeIcon icon={faSortDown} color={"#3F3356"} />;
@@ -95,21 +79,11 @@ export default function SearchResultsScreen({ navigation, route }) {
           </View>
         </View>
         <Text style={styles.resultsText}>
-          {businesses.length} {businesses.length === 1 ? "result" : "results"}
+          {filteredBusinesses.length}{" "}
+          {filteredBusinesses.length === 1 ? "result" : "results"}
         </Text>
-        <View>
-          {categories.map(item => {
-            return (
-              <View>
-                <Text>
-                  {item.name} - {item.category}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-        {businesses.length > 0 &&
-          businesses.map(business => (
+        {filteredBusinesses.length > 0 &&
+          filteredBusinesses.map(business => (
             <TouchableOpacity
               style={styles.result}
               key={business.id}
