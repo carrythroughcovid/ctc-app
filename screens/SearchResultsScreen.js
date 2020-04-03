@@ -42,10 +42,16 @@ export default function SearchResultsScreen({ navigation, route }) {
   }, [setBusinesses]);
 
   const handleCategoryChange = selectedCategory => {
-    const filtered = businesses.filter(
-      business => business.categories[0].name == selectedCategory
-    );
-    setFilteredBusinesses(filtered);
+    // If there's a selected category, filter on its name
+    // Else return all businesses
+    if (selectedCategory) {
+      const filtered = businesses.filter(
+        business => business.categories[0].name == selectedCategory
+      );
+      setFilteredBusinesses(filtered);
+    } else {
+      setFilteredBusinesses(businesses);
+    }
   };
 
   return (
