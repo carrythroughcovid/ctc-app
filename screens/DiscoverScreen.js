@@ -25,16 +25,17 @@ export default function DiscoverScreen({ navigation }) {
           }
         />
         <Divider style={styles.divider} />
-        <Text style={styles.sectionTitle}>TAKE A BROWSE</Text>
+        <Text style={styles.sectionTitle}>Take a Browse</Text>
         <Text style={styles.textHeading}>Explore Categories</Text>
         <View style={styles.categoryContainer}>
           {categories.map(({ name, iconUrl }, i) => (
             <TouchableOpacity
+              key={i}
               onPress={() =>
                 navigation.navigate("SearchResults", { category: name })
               }
             >
-              <View key={i} style={styles.categoryTile}>
+              <View key={i} style={styles.categoryIcon}>
                 <CategoryTile iconUrl={iconUrl} category={name} />
               </View>
             </TouchableOpacity>
@@ -58,13 +59,15 @@ const styles = StyleSheet.create({
     padding: 20
   },
   textHeading: {
-    fontSize: 25
+    fontSize: 25,
+    marginBottom: 15
   },
   sectionTitle: {
     color: "#9060EB",
     fontWeight: "bold",
     paddingTop: 15,
-    paddingBottom: 5
+    paddingBottom: 5,
+    textTransform: "uppercase"
   },
   divider: {
     marginTop: 20,
@@ -77,8 +80,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 3
   },
-  categoryTile: {
-    paddingTop: 20,
-    width: "48%"
+  categoryIcon: {
+    minWidth: "48%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10
   }
 });
