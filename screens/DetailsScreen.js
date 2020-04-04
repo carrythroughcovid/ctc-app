@@ -11,6 +11,7 @@ import { Button } from "react-native-elements";
 import { capitalize } from "lodash";
 
 import colours from "../utils/colours";
+import DetailsTabView from "../components/DetailsTabView";
 
 export default function DetailsScreen({ route }) {
   const { business } = route.params;
@@ -49,6 +50,9 @@ export default function DetailsScreen({ route }) {
             titleStyle={styles.actionButtonTitleStyle}
           />
         </View>
+      </View>
+      <DetailsTabView />
+      <View style={styles.paddingContainer}>
         <Text style={styles.sectionTitle}>Current Services</Text>
         <View style={styles.serviceTilesContainer}>
           {business.offerings.map(offering => {
@@ -82,14 +86,12 @@ export default function DetailsScreen({ route }) {
   );
 }
 
-DetailsScreen.navigationOptions = {};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 0,
     width: Dimensions.get("window").width,
+    paddingTop: 0,
+    backgroundColor: "#fff",
   },
   paddingContainer: {
     paddingHorizontal: 20,
