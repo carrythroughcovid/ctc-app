@@ -60,8 +60,14 @@ export default function DiscoverScreen({ navigation }) {
   );
 }
 
-DiscoverScreen.navigationOptions = {
-  header: null,
+DiscoverScreen.navigationOptions = () => {
+  return {
+    tabBarOptions: { showLabel: false },
+    tabBarOptions: {
+      activeTintColor: "#1A051D",
+      inactiveTintColor: "#CCCCCC",
+    },
+  };
 };
 
 const styles = StyleSheet.create({
