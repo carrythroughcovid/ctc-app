@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 import { Button } from "react-native-elements";
-import { dummyBusiness } from "../data/businesses";
 import { capitalize } from "lodash";
 
 export default function DetailsScreen({ route }) {
@@ -151,12 +150,15 @@ const styles = StyleSheet.create({
     color: "#1D1F24",
   },
   serviceTilesContainer: {
-    marginVertical: 25,
+    flexWrap: "wrap",
     flex: 1,
     flexDirection: "row",
+    marginTop: 20,
+    marginBottom: 15,
   },
   serviceTileBox: {
     marginRight: 10,
+    marginBottom: 10,
     paddingHorizontal: 15,
     paddingVertical: 8,
     backgroundColor: "#6CD4C4",
