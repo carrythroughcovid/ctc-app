@@ -15,60 +15,62 @@ import { faSearch, faSortDown } from "@fortawesome/free-solid-svg-icons";
 
 import ResultTile from "../components/ResultTile";
 
+const categoryData = [
+  { label: "All categories", value: "" },
+  { label: "Hospitality", value: "hospitality" },
+  { label: "Retail", value: "retail" },
+  { label: "Health and Wellbeing", value: "health and wellbeing" },
+  { label: "Services", value: "services" },
+  { label: "Other", value: "other" }
+];
+
+const nearestToMeData = [{ label: "Date added", value: "date-added" }];
+
+const DEFAULT_CATEGORY = categoryData[0]
+
+const BUSINESS_ENDPOINT = 'https://carrythroughcovid.herokuapp.com/api/businesses'
+
+const findCategory = (data, initialCategory) => {
+  if (!initialCategory) {
+    return DEFAULT_CATEGORY
+  }
+  return data.find(category => category.label === initialCategory)
+}
+
+const filterByCategory = (businesses, categoryValue) =>
+  businesses.filter(
+    (business) => business.categories[0].name == categoryValue.toLowerCase()
+  );
+
 export default function SearchResultsScreen({ navigation, route }) {
-  const { searchInput } = route.params || null;
-  const { category } = navigation.dangerouslyGetState().routes[1].params || "";
+  const { category: initialCategory } = route.params;
   const [businesses, setBusinesses] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
-  const [dropdownCategory, setDropdownCategory] = useState(category || "");
+  const [category, setCategory] = useState(findCategory(categoryData, initialCategory));
 
-  const categoryData = [
-    { label: "All categories", value: "" },
-    { label: "Hospitality", value: "hospitality" },
-    { label: "Retail", value: "retail" },
-    { label: "Health and Wellbeing", value: "health and wellbeing" },
-    { label: "Services", value: "services" },
-    { label: "Other", value: "other" },
-  ];
-
-  const nearestToMeData = [{ label: "Date added", value: "date-added" }];
-
-  // Fetch data from API
   useEffect(() => {
     const fetchBusinesses = async () => {
-      const results = await fetch(
-        `https://carrythroughcovid.herokuapp.com/api/v1/business?input=${searchInput}`
-      );
+      const results = await fetch(BUSINESS_ENDPOINT);
       const parsed = await results.json();
       setBusinesses(parsed);
-      setFilteredBusinesses(parsed);
+      initialCategory
+        ? setFilteredBusinesses(filterByCategory(parsed, initialCategory))
+        : setFilteredBusinesses(parsed);
     };
     fetchBusinesses();
-  }, [setBusinesses]);
-
-  // Update category dropdown if selected from DiscoverScreen
-  useEffect(() => {
-    const updateCategoryDropDown = async () => {
-      if (category) {
-        handleCategoryChange(category);
-      }
-    };
-    updateCategoryDropDown();
-  }, [businesses, category]);
+  }, [setBusinesses, initialCategory]);
 
   const handleCategoryChange = selectedCategory => {
-    // If there's a selected category, filter on its name
-    // Else return all businesses
-    setDropdownCategory({ label: selectedCategory, value: selectedCategory });
-    if (selectedCategory) {
-      const filtered = businesses.filter(business => {
-        return business.categories[0].name == selectedCategory.toLowerCase();
-      });
-      setFilteredBusinesses(filtered);
-    } else {
-      setFilteredBusinesses(businesses);
+    setCategory(selectedCategory);
+    if (!selectedCategory) {
+      setFilteredBusinesses(businesses)
+      return
     }
-  };
+    const filtered = businesses.filter(business => (
+      business.categories[0].name == selectedCategory.toLowerCase()
+    ));
+    setFilteredBusinesses(filtered);
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -90,7 +92,7 @@ export default function SearchResultsScreen({ navigation, route }) {
           <View style={styles.dropDown}>
             <RNPickerSelect
               placeholder={{}}
-              placeholderTextColor='#3F3356'
+              value={category.value}
               items={categoryData}
               onValueChange={value => handleCategoryChange(value)}
               Icon={() => {
@@ -112,27 +114,30 @@ export default function SearchResultsScreen({ navigation, route }) {
             />
           </View>
         </View>
-        <Text style={styles.resultsText}>
-          {filteredBusinesses.length}{" "}
-          {filteredBusinesses.length === 1 ? "result" : "results"}{" "}
-          {dropdownCategory.label
-            ? `for ${capitalize(dropdownCategory.label)}`
-            : ``}
-        </Text>
-        {filteredBusinesses.length > 0 &&
-          filteredBusinesses.map(business => (
-            <TouchableOpacity
-              style={styles.result}
-              key={business.id}
-              onPress={() => navigation.navigate("Details", { business })}
-            >
-              <ResultTile
-                name={business.name}
-                category={business.categories[0].name}
-                suburb={business.suburb}
-              />
-            </TouchableOpacity>
-          ))}
+        {businesses.length > 0 ? (
+          <View>
+            <Text style={styles.resultsText}>
+              {filteredBusinesses.length}{" "}
+              {filteredBusinesses.length === 1 ? "result" : "results"}
+            </Text>
+            {filteredBusinesses.length > 0 &&
+              filteredBusinesses.map(business => (
+                <TouchableOpacity
+                  style={styles.result}
+                  key={business.id}
+                  onPress={() => navigation.navigate("Details", { business })}
+                >
+                  <ResultTile
+                    name={business.name}
+                    category={business.categories[0].name}
+                    suburb={business.suburb}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : (
+            <Text>Loading</Text>
+          )}
       </View>
     </ScrollView>
   );
