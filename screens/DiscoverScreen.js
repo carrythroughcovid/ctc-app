@@ -5,26 +5,39 @@ import {
   View,
   Text,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { Input, Divider } from "react-native-elements";
 
 import CategoryTile from "../components/CategoryTile";
 import { categories } from "../data/categories";
 
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 export default function DiscoverScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-        <Input
-          placeholder="Search by location or business name"
-          onSubmitEditing={event =>
-            navigation.navigate("SearchResults", {
-              searchInput: event.nativeEvent.text
-            })
-          }
-        />
-        <Divider style={styles.divider} />
+        <View style={styles.inputContainer}>
+          <Input
+            placeholder='Search by location or business name'
+            onSubmitEditing={event =>
+              navigation.navigate("SearchResults", {
+                searchInput: event.nativeEvent.text,
+              })
+            }
+            leftIcon={() => {
+              return <FontAwesomeIcon icon={faSearch} color={"#3F3356"} />;
+            }}
+            leftIconContainerStyle={styles.leftIconContainerStyle}
+            inputStyle={styles.inputStyle}
+            inputContainerStyle={styles.inputContainerStyle}
+          />
+        </View>
+      </ScrollView>
+      <Divider style={styles.divider} />
+      <ScrollView style={styles.scrollContainer}>
         <Text style={styles.sectionTitle}>Take a Browse</Text>
         <Text style={styles.textHeading}>Explore Categories</Text>
         <View style={styles.categoryContainer}>
@@ -47,44 +60,62 @@ export default function DiscoverScreen({ navigation }) {
 }
 
 DiscoverScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+  },
+  inputContainer: {
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: "#ECEBED",
+  },
+  inputContainerStyle: {
+    paddingVertical: 2,
+    borderWidth: 0,
+    borderColor: "transparent",
+  },
+  leftIconContainerStyle: {
+    marginRight: 8,
+    marginLeft: 5,
+  },
+  inputStyle: {
+    borderWidth: 0,
+    fontSize: 15,
   },
   scrollContainer: {
-    padding: 20
+    paddingHorizontal: 20,
+    paddingVertical: 35,
   },
   textHeading: {
     fontSize: 25,
-    marginBottom: 15
+    marginBottom: 15,
   },
   sectionTitle: {
     color: "#9060EB",
     fontWeight: "bold",
     paddingTop: 15,
     paddingBottom: 5,
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   divider: {
-    marginTop: 20,
-    marginBottom: 20
+    backgroundColor: "#CCCCCC",
   },
   categoryContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    padding: 3
+    padding: 3,
   },
   categoryIcon: {
     minWidth: "48%",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
-    shadowRadius: 10
-  }
+    shadowRadius: 10,
+  },
 });
