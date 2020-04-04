@@ -38,7 +38,7 @@ export default function DiscoverScreen({ navigation }) {
       <Divider style={styles.divider} />
       <ScrollView style={styles.scrollContainer}>
         <Text style={styles.sectionTitle}>Take a Browse</Text>
-        <Text style={styles.textHeading}>Explore Categories</Text>
+        <Text style={styles.textHeading}>Explore categories</Text>
         <View style={styles.categoryContainer}>
           {categories.map(({ name, icon }, i) => (
             <TouchableOpacity
@@ -56,16 +56,6 @@ export default function DiscoverScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
-DiscoverScreen.navigationOptions = () => {
-  return {
-    tabBarOptions: { showLabel: false },
-    tabBarOptions: {
-      activeTintColor: "#1A051D",
-      inactiveTintColor: "#CCCCCC",
-    },
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -92,19 +82,20 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 35,
+    paddingVertical: 15,
   },
   textHeading: {
     fontSize: 25,
     marginBottom: 15,
   },
   sectionTitle: {
-    color: colours.brandAccent3,
-    fontWeight: "bold",
+    marginTop: 25,
     paddingBottom: 5,
     textTransform: "uppercase",
     fontFamily: "Oswald Regular",
+    fontWeight: "bold",
     fontSize: 18,
+    color: colours.brandAccent3,
   },
   divider: {
     borderColor: colours.backgroundGrey,
@@ -118,7 +109,7 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   categoryBox: {
-    width: "48%",
+    width: "47%",
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
