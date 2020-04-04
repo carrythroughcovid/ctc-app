@@ -12,8 +12,7 @@ import { Input, Divider } from "react-native-elements";
 import CategoryTile from "../components/CategoryTile";
 import { categories } from "../data/categories";
 
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 export default function DiscoverScreen({ navigation }) {
   return (
@@ -28,7 +27,9 @@ export default function DiscoverScreen({ navigation }) {
               })
             }
             leftIcon={() => {
-              return <FontAwesomeIcon icon={faSearch} color={"#3F3356"} />;
+              return (
+                <FeatherIcon name='search' color={"#3F3356"} height={30} />
+              );
             }}
             leftIconContainerStyle={styles.leftIconContainerStyle}
             inputStyle={styles.inputStyle}
