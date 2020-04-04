@@ -43,7 +43,7 @@ const filterByCategory = (businesses, categoryValue) =>
   );
 
 export default function SearchResultsScreen({ navigation, route }) {
-  const { category: initialCategory } = route.params;
+  const { searchInput, category: initialCategory } = route.params;
   const [businesses, setBusinesses] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
   const [category, setCategory] = useState(findCategory(categoryData, initialCategory));
