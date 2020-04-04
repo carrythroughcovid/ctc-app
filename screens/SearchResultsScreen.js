@@ -15,20 +15,23 @@ import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 import ResultTile from "../components/ResultTile";
 
 export default function SearchResultsScreen({ navigation, route }) {
-  const { searchInput } = route.params;
+  const { searchInput } = route.params || null;
+  const { category } = navigation.dangerouslyGetState().routes[1].params || "";
   const [businesses, setBusinesses] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const categoryData = [
+    { label: "All categories", value: "" },
     { label: "Hospitality", value: "hospitality" },
     { label: "Retail", value: "retail" },
-    { label: "Health and Wellbeing", value: "health-wellbeing" },
+    { label: "Health and Wellbeing", value: "health and wellbeing" },
     { label: "Services", value: "services" },
     { label: "Other", value: "other" }
   ];
 
   const nearestToMeData = [{ label: "Date added", value: "date-added" }];
 
+  // Fetch data from API
   useEffect(() => {
     const fetchBusinesses = async () => {
       const results = await fetch(
@@ -41,13 +44,23 @@ export default function SearchResultsScreen({ navigation, route }) {
     fetchBusinesses();
   }, [setBusinesses]);
 
+  // Update category dropdown if selected from DiscoverScreen
+  useEffect(() => {
+    const updateCategoryDropDown = async () => {
+      if (category) {
+        handleCategoryChange(category);
+      }
+    };
+    updateCategoryDropDown();
+  }, [businesses, category]);
+
   const handleCategoryChange = selectedCategory => {
     // If there's a selected category, filter on its name
     // Else return all businesses
     if (selectedCategory) {
-      const filtered = businesses.filter(
-        business => business.categories[0].name == selectedCategory
-      );
+      const filtered = businesses.filter(business => {
+        return business.categories[0].name == selectedCategory.toLowerCase();
+      });
       setFilteredBusinesses(filtered);
     } else {
       setFilteredBusinesses(businesses);
@@ -61,26 +74,26 @@ export default function SearchResultsScreen({ navigation, route }) {
         <View style={styles.dropDownContainer}>
           <View style={styles.dropDown}>
             <RNPickerSelect
-              style={pickerSelectStyles}
-              onValueChange={e => handleCategoryChange(e)}
-              items={categoryData}
-              placeholder={{ label: "All categories", value: null }}
+              placeholder={{}}
               placeholderTextColor="#3F3356"
+              items={categoryData}
+              onValueChange={value => handleCategoryChange(value)}
               Icon={() => {
                 return <FontAwesomeIcon icon={faSortDown} color={"#3F3356"} />;
               }}
+              style={pickerSelectStyles}
             />
           </View>
           <View style={styles.dropDown}>
             <RNPickerSelect
-              style={pickerSelectStyles}
-              onValueChange={value => console.log(value)}
-              items={nearestToMeData}
               placeholder={{ label: "Nearest to me", value: "nearest-to-me" }}
               placeholderTextColor="#3F3356"
+              items={nearestToMeData}
+              onValueChange={value => console.log(value)}
               Icon={() => {
                 return <FontAwesomeIcon icon={faSortDown} color={"#3F3356"} />;
               }}
+              style={pickerSelectStyles}
             />
           </View>
         </View>
