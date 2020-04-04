@@ -47,7 +47,6 @@ export default function SearchResultsScreen({ navigation, route }) {
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
   const [category, setCategory] = useState(findCategory(categoryData, initialCategory));
 
-  // Fetch data from API
   useEffect(() => {
     const fetchBusinesses = async () => {
       const results = await fetch(BUSINESS_ENDPOINT);
@@ -61,6 +60,7 @@ export default function SearchResultsScreen({ navigation, route }) {
   }, [setBusinesses, initialCategory]);
 
   const handleCategoryChange = selectedCategory => {
+    setCategory(selectedCategory);
     if (!selectedCategory) {
       setFilteredBusinesses(businesses)
       return
@@ -68,9 +68,7 @@ export default function SearchResultsScreen({ navigation, route }) {
     const filtered = businesses.filter(business => (
       business.categories[0].name == selectedCategory.toLowerCase()
     ));
-    setCategory(selectedCategory);
     setFilteredBusinesses(filtered);
-    return selectedCategory;
   }
 
   return (
