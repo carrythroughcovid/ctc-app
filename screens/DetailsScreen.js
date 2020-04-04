@@ -41,7 +41,11 @@ export default function DetailsScreen({ route }) {
           </View>
         </View>
         <View styles={styles.actionButtonContainer}>
-          <Button title='Visit our website' buttonStyle={styles.actionButton} />
+          <Button
+            title='Visit our website'
+            buttonStyle={styles.actionButton}
+            titleStyle={styles.actionButtonTitleStyle}
+          />
         </View>
         <Text style={styles.sectionTitle}>Current Services</Text>
         <View style={styles.serviceTilesContainer}>
@@ -142,6 +146,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#6979F8",
     borderRadius: 8,
     marginBottom: 20,
+  },
+  actionButtonTitleStyle: {
+    fontSize: 16,
   },
   sectionParagraph: {
     marginBottom: 10,
