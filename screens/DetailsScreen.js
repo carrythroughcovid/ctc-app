@@ -38,8 +38,8 @@ export default function DetailsScreen({ route }) {
           <View style={styles.titleDetailsContainer}>
             <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>
-              {capitalize(business.categories[0].name)} &middot;{" "}
-              {business.address.suburb}
+              {capitalize(business.categories[0].name)}
+              {business.address.suburb ? ` · ${business.address.suburb}` : ``}
             </Text>
           </View>
         </View>

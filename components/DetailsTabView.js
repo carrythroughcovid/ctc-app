@@ -8,7 +8,7 @@ const UpdatesRoute = () => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
       <Text style={styles.sectionTitle}>Updates</Text>
-      <Text style={styles.sectionParagraph}>Something about updates</Text>
+      <Text style={styles.sectionParagraph}>Something about updates.</Text>
     </View>
   </View>
 );
@@ -17,7 +17,7 @@ const AboutRoute = () => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
       <Text style={styles.sectionTitle}>About</Text>
-      <Text style={styles.sectionParagraph}>Something about about us</Text>
+      <Text style={styles.sectionParagraph}>Something about the company.</Text>
     </View>
   </View>
 );
