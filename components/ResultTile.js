@@ -3,18 +3,18 @@ import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
 
 const headerImage = {
   uri:
-    "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg"
+    "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg",
 };
 const categoryImage = {
   uri:
-    "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png"
+    "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
 };
 
 const ResultTile = ({
   name,
   suburb,
   category,
-  description = "Some quick high-level description about the business."
+  description = "Some quick high-level description about the business.",
 }) => (
   <View style={styles.shadow}>
     <View style={styles.container}>
@@ -42,45 +42,45 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 5,
     elevation: 5,
-    position: "relative"
+    position: "relative",
   },
   bottomWrapper: {
     backgroundColor: "white",
     paddingBottom: 30,
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   bottomContainer: {
     display: "flex",
     alignItems: "center",
     maxWidth: "80%",
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
   },
   image: {
     resizeMode: "cover",
-    minHeight: 150
+    minHeight: 150,
   },
   shadow: {
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
-    shadowRadius: 10
+    shadowRadius: 10,
   },
   text: {
-    padding: 20
+    padding: 20,
   },
   title: {
-    fontSize: 20
+    fontSize: 20,
   },
   subTitle: {
     textAlign: "center",
-    paddingTop: 10
+    paddingTop: 10,
   },
   categoryImage: {
     width: 40,
     height: 40,
-    transform: [{ translateY: -2 }]
+    transform: [{ translateY: -2 }],
   },
   category: {
     display: "flex",
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     marginTop: -40,
     borderRadius: 50,
     borderColor: "white",
-    borderWidth: 5
+    borderWidth: 5,
   },
   suburb: {
     position: "absolute",
@@ -103,14 +103,14 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: "#BE52F2",
-    borderRadius: 5
+    borderRadius: 5,
   },
   suburbText: {
     textTransform: "uppercase",
     letterSpacing: 0.5,
     fontSize: 11,
-    color: "white"
-  }
+    color: "white",
+  },
 });
 
 export default ResultTile;

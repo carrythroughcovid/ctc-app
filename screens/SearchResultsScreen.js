@@ -8,10 +8,8 @@ import {
 } from "react-native";
 import { Input } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
-import { capitalize } from "lodash";
 
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faSearch, faSortDown } from "@fortawesome/free-solid-svg-icons";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 import ResultTile from "../components/ResultTile";
 
@@ -21,32 +19,35 @@ const categoryData = [
   { label: "Retail", value: "retail" },
   { label: "Health and Wellbeing", value: "health and wellbeing" },
   { label: "Services", value: "services" },
-  { label: "Other", value: "other" }
+  { label: "Other", value: "other" },
 ];
 
 const nearestToMeData = [{ label: "Date added", value: "date-added" }];
 
-const DEFAULT_CATEGORY = categoryData[0]
+const DEFAULT_CATEGORY = categoryData[0];
 
-const BUSINESS_ENDPOINT = 'https://carrythroughcovid.herokuapp.com/api/businesses'
+const BUSINESS_ENDPOINT =
+  "https://carrythroughcovid.herokuapp.com/api/businesses";
 
 const findCategory = (data, initialCategory) => {
   if (!initialCategory) {
-    return DEFAULT_CATEGORY
+    return DEFAULT_CATEGORY;
   }
-  return data.find(category => category.label === initialCategory)
-}
+  return data.find(category => category.label === initialCategory);
+};
 
 const filterByCategory = (businesses, categoryValue) =>
   businesses.filter(
-    (business) => business.categories[0].name == categoryValue.toLowerCase()
+    business => business.categories[0].name == categoryValue.toLowerCase(),
   );
 
 export default function SearchResultsScreen({ navigation, route }) {
   const { searchInput, category: initialCategory } = route.params;
   const [businesses, setBusinesses] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
-  const [category, setCategory] = useState(findCategory(categoryData, initialCategory));
+  const [category, setCategory] = useState(
+    findCategory(categoryData, initialCategory),
+  );
 
   useEffect(() => {
     const fetchBusinesses = async () => {
@@ -63,14 +64,14 @@ export default function SearchResultsScreen({ navigation, route }) {
   const handleCategoryChange = selectedCategory => {
     setCategory(selectedCategory);
     if (!selectedCategory) {
-      setFilteredBusinesses(businesses)
-      return
+      setFilteredBusinesses(businesses);
+      return;
     }
-    const filtered = businesses.filter(business => (
-      business.categories[0].name == selectedCategory.toLowerCase()
-    ));
+    const filtered = businesses.filter(
+      business => business.categories[0].name == selectedCategory.toLowerCase(),
+    );
     setFilteredBusinesses(filtered);
-  }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -79,7 +80,7 @@ export default function SearchResultsScreen({ navigation, route }) {
           <Input
             placeholder='Search by location or business name'
             leftIcon={() => {
-              return <FontAwesomeIcon icon={faSearch} color={"#3F3356"} />;
+              return <FeatherIcon name='search' color={"#3F3356"} size={20} />;
             }}
             leftIconContainerStyle={styles.leftIconContainerStyle}
             inputStyle={styles.inputStyle}
@@ -96,7 +97,13 @@ export default function SearchResultsScreen({ navigation, route }) {
               items={categoryData}
               onValueChange={value => handleCategoryChange(value)}
               Icon={() => {
-                return <FontAwesomeIcon icon={faSortDown} color={"#3F3356"} />;
+                return (
+                  <FeatherIcon
+                    name='chevron-down'
+                    color={"#3F3356"}
+                    size={18}
+                  />
+                );
               }}
               style={pickerSelectStyles}
             />
@@ -108,7 +115,13 @@ export default function SearchResultsScreen({ navigation, route }) {
               items={nearestToMeData}
               onValueChange={value => console.log(value)}
               Icon={() => {
-                return <FontAwesomeIcon icon={faSortDown} color={"#3F3356"} />;
+                return (
+                  <FeatherIcon
+                    name='chevron-down'
+                    color={"#3F3356"}
+                    size={18}
+                  />
+                );
               }}
               style={pickerSelectStyles}
             />
@@ -130,18 +143,18 @@ export default function SearchResultsScreen({ navigation, route }) {
                   <ResultTile
                     name={business.name}
                     category={business.categories[0].name}
-                    suburb={business.suburb}
+                    suburb={business.address.suburb}
                   />
                 </TouchableOpacity>
               ))}
-            </View>
-          ) : (
-            <Text>Loading</Text>
-          )}
+          </View>
+        ) : (
+          <Text style={styles.resultsText}>Loading...</Text>
+        )}
       </View>
     </ScrollView>
   );
-};
+}
 
 SearchResultsScreen.navigationOptions = {};
 
@@ -213,7 +226,6 @@ const pickerSelectStyles = {
   },
   iconContainer: {
     right: 12,
-    top: 12,
+    top: 15,
   },
 };
-
