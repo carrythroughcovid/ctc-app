@@ -8,7 +8,7 @@ import colours from "../utils/colours";
 const CategoryTile = ({ icon, category }) => {
   return (
     <View style={styles.container}>
-      <FontAwesome5 name={icon} size={45} />
+      <FontAwesome5 name={icon} size={45} color={colours.textUiPrimary} />
       <Text style={styles.text}>{category}</Text>
     </View>
   );
