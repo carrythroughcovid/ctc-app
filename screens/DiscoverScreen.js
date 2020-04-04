@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Input, Divider } from "react-native-elements";
-
 import CategoryTile from "../components/CategoryTile";
 import { categories } from "../data/categories";
-
 import FeatherIcon from "react-native-vector-icons/Feather";
+
+import colours from "../utils/colours";
 
 export default function DiscoverScreen({ navigation }) {
   return (
@@ -40,16 +40,15 @@ export default function DiscoverScreen({ navigation }) {
         <Text style={styles.sectionTitle}>Take a Browse</Text>
         <Text style={styles.textHeading}>Explore Categories</Text>
         <View style={styles.categoryContainer}>
-          {categories.map(({ name, iconUrl }, i) => (
+          {categories.map(({ name, icon }, i) => (
             <TouchableOpacity
+              style={styles.categoryBox}
               key={i}
               onPress={() =>
                 navigation.navigate("SearchResults", { category: name })
               }
             >
-              <View key={i} style={styles.categoryIcon}>
-                <CategoryTile iconUrl={iconUrl} category={name} />
-              </View>
+              <CategoryTile icon={icon} category={name} />
             </TouchableOpacity>
           ))}
         </View>
@@ -71,12 +70,12 @@ DiscoverScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colours.backgroundWhite,
   },
   inputContainer: {
     borderRadius: 3,
     borderWidth: 1,
-    borderColor: "#ECEBED",
+    borderColor: colours.backgroundGrey,
   },
   inputContainerStyle: {
     paddingVertical: 2,
@@ -100,25 +99,27 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   sectionTitle: {
-    color: "#9060EB",
+    color: colours.brandAccent3,
     fontWeight: "bold",
-    paddingTop: 15,
     paddingBottom: 5,
     textTransform: "uppercase",
+    fontFamily: "Oswald Regular",
+    fontSize: 18,
   },
   divider: {
-    backgroundColor: "#CCCCCC",
+    borderColor: colours.backgroundGrey,
   },
   categoryContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    alignItems: "stretch",
     padding: 3,
   },
-  categoryIcon: {
-    minWidth: "48%",
-    shadowColor: "#000",
+  categoryBox: {
+    width: "48%",
+    shadowColor: "#000000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 10,
