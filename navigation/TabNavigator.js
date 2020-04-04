@@ -1,21 +1,26 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import DiscoverScreen from '../screens/DiscoverScreen';
-import SearchResultsScreen from '../screens/SearchResultsScreen';
-import DetailsScreen from '../screens/DetailsScreen';
-import AboutScreen from '../screens/AboutScreen';
+import DiscoverScreen from "../screens/DiscoverScreen";
+import SearchResultsScreen from "../screens/SearchResultsScreen";
+import DetailsScreen from "../screens/DetailsScreen";
+import AboutScreen from "../screens/AboutScreen";
+
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 const DiscoverStack = createStackNavigator();
 
 function DiscoverStackScreen() {
   return (
     <DiscoverStack.Navigator>
-      <DiscoverStack.Screen name="Discover" component={DiscoverScreen} />
-      <DiscoverStack.Screen name="SearchResults" component={SearchResultsScreen} />
-      <DiscoverStack.Screen name="Details" component={DetailsScreen} />
+      <DiscoverStack.Screen name='Discover' component={DiscoverScreen} />
+      <DiscoverStack.Screen
+        name='SearchResults'
+        component={SearchResultsScreen}
+      />
+      <DiscoverStack.Screen name='Details' component={DetailsScreen} />
     </DiscoverStack.Navigator>
   );
 }
@@ -25,7 +30,7 @@ const AboutStack = createStackNavigator();
 function AboutStackScreen() {
   return (
     <AboutStack.Navigator>
-      <AboutStack.Screen name="Settings" component={AboutScreen} />
+      <AboutStack.Screen name='About' component={AboutScreen} />
     </AboutStack.Navigator>
   );
 }
@@ -36,8 +41,26 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Discover" component={DiscoverStackScreen} />
-        <Tab.Screen name="About" component={AboutStackScreen} />
+        <Tab.Screen
+          name='Discover'
+          component={DiscoverStackScreen}
+          options={{
+            tabBarLabel: "Discover",
+            tabBarIcon: () => (
+              <FeatherIcon name='search' color={"#1A051D"} size={20} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name='About'
+          component={AboutStackScreen}
+          options={{
+            tabBarLabel: "About",
+            tabBarIcon: () => (
+              <FeatherIcon name='info' color={"#1A051D"} size={20} />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
