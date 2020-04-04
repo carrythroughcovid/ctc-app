@@ -51,7 +51,7 @@ export default function DetailsScreen({ route }) {
         <View style={styles.serviceTilesContainer}>
           {business.offerings.map(offering => {
             return (
-              <View style={styles.serviceTileBox}>
+              <View style={styles.serviceTileBox} key={offering.name}>
                 <Text style={styles.serviceTileText}>
                   {capitalize(offering.name)}
                 </Text>
