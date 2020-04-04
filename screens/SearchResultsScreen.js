@@ -101,24 +101,30 @@ export default function SearchResultsScreen({ navigation, route }) {
             />
           </View>
         </View>
-        <Text style={styles.resultsText}>
-          {filteredBusinesses.length}{" "}
-          {filteredBusinesses.length === 1 ? "result" : "results"}
-        </Text>
-        {filteredBusinesses.length > 0 &&
-          filteredBusinesses.map(business => (
-            <TouchableOpacity
-              style={styles.result}
-              key={business.id}
-              onPress={() => navigation.navigate("Details", { business })}
-            >
-              <ResultTile
-                name={business.name}
-                category={business.categories[0].name}
-                suburb={business.suburb}
-              />
-            </TouchableOpacity>
-          ))}
+        {businesses.length > 0 ? (
+          <View>
+            <Text style={styles.resultsText}>
+              {filteredBusinesses.length}{" "}
+              {filteredBusinesses.length === 1 ? "result" : "results"}
+            </Text>
+            {filteredBusinesses.length > 0 &&
+              filteredBusinesses.map(business => (
+                <TouchableOpacity
+                  style={styles.result}
+                  key={business.id}
+                  onPress={() => navigation.navigate("Details", { business })}
+                >
+                  <ResultTile
+                    name={business.name}
+                    category={business.categories[0].name}
+                    suburb={business.suburb}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : (
+            <Text>Loading</Text>
+          )}
       </View>
     </ScrollView>
   );
