@@ -27,9 +27,7 @@ export default function DiscoverScreen({ navigation }) {
               })
             }
             leftIcon={() => {
-              return (
-                <FeatherIcon name='search' color={"#3F3356"} height={30} />
-              );
+              return <FeatherIcon name='search' color={"#3F3356"} size={20} />;
             }}
             leftIconContainerStyle={styles.leftIconContainerStyle}
             inputStyle={styles.inputStyle}
