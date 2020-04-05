@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { Input } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
-
 import FeatherIcon from "react-native-vector-icons/Feather";
-
 import ResultTile from "../components/ResultTile";
+
+import colours from "../utils/colours";
 
 const categoryData = [
   { label: "All categories", value: "" },
@@ -80,7 +80,13 @@ export default function SearchResultsScreen({ navigation, route }) {
           <Input
             placeholder='Search by location or business name'
             leftIcon={() => {
-              return <FeatherIcon name='search' color={"#3F3356"} size={20} />;
+              return (
+                <FeatherIcon
+                  name='search'
+                  color={colours.textUiPrimary}
+                  size={20}
+                />
+              );
             }}
             leftIconContainerStyle={styles.leftIconContainerStyle}
             inputStyle={styles.inputStyle}
@@ -93,6 +99,7 @@ export default function SearchResultsScreen({ navigation, route }) {
           <View style={styles.dropDown}>
             <RNPickerSelect
               placeholder={{}}
+              placeholderTextColor={colours.textUiSecondary}
               value={category.value}
               items={categoryData}
               onValueChange={value => handleCategoryChange(value)}
@@ -100,7 +107,7 @@ export default function SearchResultsScreen({ navigation, route }) {
                 return (
                   <FeatherIcon
                     name='chevron-down'
-                    color={"#3F3356"}
+                    color={colours.textUiPrimary}
                     size={18}
                   />
                 );
@@ -111,14 +118,14 @@ export default function SearchResultsScreen({ navigation, route }) {
           <View style={styles.dropDown}>
             <RNPickerSelect
               placeholder={{ label: "Nearest to me", value: "nearest-to-me" }}
-              placeholderTextColor='#3F3356'
+              placeholderTextColor={colours.textUiSecondary}
               items={nearestToMeData}
               onValueChange={value => console.log(value)}
               Icon={() => {
                 return (
                   <FeatherIcon
                     name='chevron-down'
-                    color={"#3F3356"}
+                    color={colours.textUiPrimary}
                     size={18}
                   />
                 );
@@ -161,16 +168,15 @@ SearchResultsScreen.navigationOptions = {};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     paddingTop: 0,
+    backgroundColor: colours.backgroundWhite,
   },
   dropDown: {
-    fontSize: 16,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#ECEBED",
-    borderRadius: 3,
     width: "49%",
+    borderWidth: 1,
+    borderColor: colours.backgroundGrey,
+    borderRadius: 3,
+    fontSize: 16,
   },
   dropDownContainer: {
     flex: 1,
@@ -184,7 +190,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderRadius: 3,
     borderWidth: 1,
-    borderColor: "#ECEBED",
+    borderColor: colours.backgroundGrey,
   },
   inputContainerStyle: {
     paddingVertical: 2,
@@ -210,19 +216,19 @@ const styles = StyleSheet.create({
   resultsText: {
     marginTop: 25,
     marginBottom: 10,
-    color: "#787187",
+    color: colours.textUiSecondary,
   },
 });
 
 const pickerSelectStyles = {
   inputIOS: {
-    color: "#3F3356",
+    color: colours.textUiSecondary,
     paddingTop: 15,
     paddingHorizontal: 10,
     paddingBottom: 14,
   },
   inputAndroid: {
-    color: "#3F3356",
+    color: colours.textUiSecondary,
   },
   iconContainer: {
     right: 12,

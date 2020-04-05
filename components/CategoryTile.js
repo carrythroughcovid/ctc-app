@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 
-const CategoryTile = ({ iconUrl, category }) => {
-  const image = { uri: iconUrl };
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+import colours from "../utils/colours";
+
+const CategoryTile = ({ icon, category }) => {
   return (
     <View style={styles.container}>
-      <Image source={image} style={styles.image} />
+      <FontAwesome5 name={icon} size={45} color={colours.textUiPrimary} />
       <Text style={styles.text}>{category}</Text>
     </View>
   );
@@ -19,18 +21,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 200,
     elevation: 5,
-    backgroundColor: "white",
+    backgroundColor: colours.backgroundWhite,
     padding: 20,
-    marginVertical: 10
+    marginVertical: 10,
   },
   image: {
     width: 50,
-    height: 50
+    height: 50,
   },
   text: {
+    flexWrap: "wrap",
     paddingTop: 10,
-    textAlign: "center"
-  }
+    textAlign: "center",
+    fontFamily: "Oswald Regular",
+    textTransform: "uppercase",
+    fontSize: 18,
+    color: colours.textUiPrimary,
+  },
 });
 
 export default CategoryTile;

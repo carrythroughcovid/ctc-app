@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
 
+import colours from "../utils/colours";
+
 const headerImage = {
   uri:
     "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg",
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   bottomWrapper: {
-    backgroundColor: "white",
+    backgroundColor: colours.backgroundWhite,
     paddingBottom: 30,
     display: "flex",
     alignItems: "center",
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     minHeight: 150,
   },
   shadow: {
-    shadowColor: "#000",
+    shadowColor: "#000000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
@@ -72,10 +74,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    fontWeight: "bold",
+    color: colours.textUiPrimary,
   },
   subTitle: {
     textAlign: "center",
     paddingTop: 10,
+    color: colours.textUiSecondary,
   },
   categoryImage: {
     width: 40,
@@ -88,10 +93,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 80,
     height: 80,
-    backgroundColor: "#F2F2F2",
+    backgroundColor: colours.backgroundGrey,
     marginTop: -40,
     borderRadius: 50,
-    borderColor: "white",
+    borderColor: colours.backgroundWhite,
     borderWidth: 5,
   },
   suburb: {
@@ -102,14 +107,14 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: "#BE52F2",
+    backgroundColor: colours.brandAccent3,
     borderRadius: 5,
   },
   suburbText: {
     textTransform: "uppercase",
     letterSpacing: 0.5,
     fontSize: 11,
-    color: "white",
+    color: colours.backgroundWhite,
   },
 });
 

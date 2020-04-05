@@ -10,6 +10,9 @@ import {
 import { Button } from "react-native-elements";
 import { capitalize } from "lodash";
 
+import colours from "../utils/colours";
+import DetailsTabView from "../components/DetailsTabView";
+
 export default function DetailsScreen({ route }) {
   const { business } = route.params;
   return (
@@ -35,8 +38,8 @@ export default function DetailsScreen({ route }) {
           <View style={styles.titleDetailsContainer}>
             <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>
-              {capitalize(business.categories[0].name)} &middot;{" "}
-              {business.address.suburb}
+              {capitalize(business.categories[0].name)}
+              {business.address.suburb ? ` · ${business.address.suburb}` : ``}
             </Text>
           </View>
         </View>
@@ -47,6 +50,9 @@ export default function DetailsScreen({ route }) {
             titleStyle={styles.actionButtonTitleStyle}
           />
         </View>
+      </View>
+      <DetailsTabView />
+      <View style={styles.paddingContainer}>
         <Text style={styles.sectionTitle}>Current Services</Text>
         <View style={styles.serviceTilesContainer}>
           {business.offerings.map(offering => {
@@ -60,18 +66,19 @@ export default function DetailsScreen({ route }) {
           })}
         </View>
         <View>
-          <Text style={styles.sectionTitle}>DETAILS</Text>
+          <Text style={styles.sectionTitle}>Details</Text>
           <Text style={styles.sectionParagraph}>
-            Here are the details about the particular offering from the store.
-            It will just be free text for them to describe the offerings above.
+            {business.product_details
+              ? business.product_details
+              : `${business.name.trim()} hasn't provided any information about their product offerings yet.`}
           </Text>
         </View>
         <View>
-          <Text style={styles.sectionTitle}>ABOUT</Text>
+          <Text style={styles.sectionTitle}>About</Text>
           <Text style={styles.sectionParagraph}>
-            Business owners will be asked to add info about their business, and
-            this is an opportunity to tell their story and connect with the
-            community.
+            {business.business_details
+              ? business.business_details
+              : `${business.name.trim()} hasn't provided any information about their business yet.`}
           </Text>
         </View>
       </View>
@@ -79,14 +86,12 @@ export default function DetailsScreen({ route }) {
   );
 }
 
-DetailsScreen.navigationOptions = {};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 0,
     width: Dimensions.get("window").width,
+    paddingTop: 0,
+    backgroundColor: "#fff",
   },
   paddingContainer: {
     paddingHorizontal: 20,
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   logoImageContainer: {
-    backgroundColor: "#F2F2F2",
+    backgroundColor: colours.backgroundGrey,
     borderRadius: 50,
     padding: 18,
     width: 60,
@@ -128,39 +133,43 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     marginBottom: 3,
+    color: colours.textUiPrimary,
   },
   subTitle: {
     fontSize: 15,
-    color: "#A5A5A7",
+    color: colours.textUiSecondary,
   },
   sectionTitle: {
-    color: "#9060EB",
+    color: colours.brandAccent3,
     fontWeight: "bold",
     paddingTop: 15,
     paddingBottom: 5,
     textTransform: "uppercase",
+    fontFamily: "Oswald Regular",
+    fontSize: 16,
   },
   actionButton: {
-    paddingTop: 10,
-    paddingBottom: 12,
-    backgroundColor: "#6979F8",
+    paddingTop: 12,
+    paddingBottom: 14,
+    backgroundColor: colours.brand,
     borderRadius: 8,
     marginBottom: 20,
   },
   actionButtonTitleStyle: {
     fontSize: 16,
+    fontWeight: "bold",
   },
   sectionParagraph: {
     marginBottom: 10,
     fontSize: 16,
     lineHeight: 24,
-    color: "#1D1F24",
+    color: colours.textUiPrimary,
   },
   serviceTilesContainer: {
     flexWrap: "wrap",
     flex: 1,
     flexDirection: "row",
-    marginTop: 20,
+    marginTop: 5,
     marginBottom: 15,
   },
   serviceTileBox: {
@@ -168,7 +177,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 15,
     paddingVertical: 8,
-    backgroundColor: "#6CD4C4",
+    backgroundColor: colours.brandAccent1,
     borderRadius: 20,
   },
   serviceTileText: {
