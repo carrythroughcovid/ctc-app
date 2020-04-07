@@ -6,6 +6,7 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { Input, Divider } from "react-native-elements";
 import CategoryTile from "../components/CategoryTile";
@@ -18,24 +19,7 @@ export default function DiscoverScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-        <View style={styles.inputContainer}>
-          <Input
-            placeholder='Search by location or business name'
-            onSubmitEditing={event =>
-              navigation.navigate("SearchResults", {
-                searchInput: event.nativeEvent.text,
-              })
-            }
-            leftIcon={() => {
-              return <FeatherIcon name='search' color={"#3F3356"} size={20} />;
-            }}
-            leftIconContainerStyle={styles.leftIconContainerStyle}
-            inputStyle={styles.inputStyle}
-            inputContainerStyle={styles.inputContainerStyle}
-          />
-        </View>
       </ScrollView>
-      <Divider style={styles.divider} />
       <ScrollView style={styles.scrollContainer}>
         <Text style={styles.sectionTitle}>Take a Browse</Text>
         <Text style={styles.textHeading}>Explore categories</Text>
@@ -59,18 +43,8 @@ export default function DiscoverScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: colours.backgroundWhite,
-  },
-  inputContainer: {
-    borderRadius: 3,
-    borderWidth: 1,
-    borderColor: colours.backgroundGrey,
-  },
-  inputContainerStyle: {
-    paddingVertical: 2,
-    borderWidth: 0,
-    borderColor: "transparent",
+    height: "100%",
   },
   leftIconContainerStyle: {
     marginRight: 8,
@@ -81,8 +55,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   scrollContainer: {
+    backgroundColor: colours.backgroundWhite,
     paddingHorizontal: 20,
-    paddingVertical: 15,
   },
   textHeading: {
     fontSize: 25,

@@ -76,25 +76,6 @@ export default function SearchResultsScreen({ navigation, route }) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.paddingContainer}>
-        <View style={styles.inputContainer}>
-          <Input
-            placeholder='Search by location or business name'
-            leftIcon={() => {
-              return (
-                <FeatherIcon
-                  name='search'
-                  color={colours.textUiPrimary}
-                  size={20}
-                />
-              );
-            }}
-            leftIconContainerStyle={styles.leftIconContainerStyle}
-            inputStyle={styles.inputStyle}
-            inputContainerStyle={styles.inputContainerStyle}
-          >
-            {searchInput ? searchInput : ""}
-          </Input>
-        </View>
         <View style={styles.dropDownContainer}>
           <View style={styles.dropDown}>
             <RNPickerSelect
@@ -103,24 +84,6 @@ export default function SearchResultsScreen({ navigation, route }) {
               value={category.value}
               items={categoryData}
               onValueChange={value => handleCategoryChange(value)}
-              Icon={() => {
-                return (
-                  <FeatherIcon
-                    name='chevron-down'
-                    color={colours.textUiPrimary}
-                    size={18}
-                  />
-                );
-              }}
-              style={pickerSelectStyles}
-            />
-          </View>
-          <View style={styles.dropDown}>
-            <RNPickerSelect
-              placeholder={{ label: "Nearest to me", value: "nearest-to-me" }}
-              placeholderTextColor={colours.textUiSecondary}
-              items={nearestToMeData}
-              onValueChange={value => console.log(value)}
               Icon={() => {
                 return (
                   <FeatherIcon
@@ -150,7 +113,7 @@ export default function SearchResultsScreen({ navigation, route }) {
                   <ResultTile
                     name={business.name}
                     category={business.categories[0].name}
-                    suburb={business.address.suburb}
+                    suburb={business.suburb}
                   />
                 </TouchableOpacity>
               ))}
@@ -172,7 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: colours.backgroundWhite,
   },
   dropDown: {
-    width: "49%",
+    width: "100%",
     borderWidth: 1,
     borderColor: colours.backgroundGrey,
     borderRadius: 3,
