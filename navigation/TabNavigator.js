@@ -43,7 +43,13 @@ const AboutStack = createStackNavigator();
 function AboutStackScreen() {
   return (
     <AboutStack.Navigator>
-      <AboutStack.Screen name='About' component={AboutScreen} />
+      <AboutStack.Screen
+        name='About'
+        component={AboutScreen} 
+        options={{
+          headerTitle: "",
+        }}
+      />
     </AboutStack.Navigator>
   );
 }

@@ -19,8 +19,6 @@ export default function DiscoverScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-      </ScrollView>
-      <ScrollView style={styles.scrollContainer}>
         <Text style={styles.sectionTitle}>Take a Browse</Text>
         <Text style={styles.textHeading}>Explore categories</Text>
         <View style={styles.categoryContainer}>
