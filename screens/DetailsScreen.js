@@ -11,7 +11,6 @@ import { Button } from "react-native-elements";
 import { capitalize } from "lodash";
 
 import colours from "../utils/colours";
-import DetailsTabView from "../components/DetailsTabView";
 
 export default function DetailsScreen({ route }) {
   const { business } = route.params;
@@ -51,7 +50,6 @@ export default function DetailsScreen({ route }) {
           />
         </View>
       </View>
-      <DetailsTabView />
       <View style={styles.paddingContainer}>
         <Text style={styles.sectionTitle}>Current Services</Text>
         <View style={styles.serviceTilesContainer}>

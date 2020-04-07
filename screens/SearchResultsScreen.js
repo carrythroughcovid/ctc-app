@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Input } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import ResultTile from "../components/ResultTile";
@@ -21,8 +20,6 @@ const categoryData = [
   { label: "Services", value: "services" },
   { label: "Other", value: "other" },
 ];
-
-const nearestToMeData = [{ label: "Date added", value: "date-added" }];
 
 const DEFAULT_CATEGORY = categoryData[0];
 

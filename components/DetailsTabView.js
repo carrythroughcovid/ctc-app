@@ -16,7 +16,7 @@ const UpdatesRoute = () => (
 const AboutRoute = () => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
-      <Text style={styles.sectionTitle}>About</Text>
+      <Text style={styles.sectionTitle}>About Us</Text>
       <Text style={styles.sectionParagraph}>Something about the company.</Text>
     </View>
   </View>
