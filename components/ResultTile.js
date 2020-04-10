@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
 
+import Highlight from "./Highlight";
 import colours from "../utils/colours";
 
 const headerImage = {
@@ -12,32 +13,35 @@ const categoryImage = {
     "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
 };
 
-const ResultTile = ({
-  name,
-  suburb,
-  category,
-  description = "Some quick high-level description about the business.",
-}) => (
-  <View style={styles.shadow}>
-    <View style={styles.container}>
-      <ImageBackground source={headerImage} style={styles.image} />
-      {suburb && (
-        <View style={styles.suburb}>
-          <Text style={styles.suburbText}>{suburb}</Text>
-        </View>
-      )}
-      <View style={styles.bottomWrapper}>
-        <View style={styles.category}>
-          <Image style={styles.categoryImage} source={categoryImage} />
-        </View>
-        <View style={styles.bottomContainer}>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.subTitle}>{description}</Text>
+const ResultTile = ({ business }) => {
+  const { location, categories } = business;
+  const category = categories[0].name;
+  const { suburb } = location;
+
+  const description = "Some quick high-level description about the business.";
+
+  return (
+    <View style={styles.shadow}>
+      <View style={styles.container}>
+        <ImageBackground source={headerImage} style={styles.image} />
+        {!!suburb && (
+          <View style={styles.suburb}>
+            <Text style={styles.suburbText}>{suburb}</Text>
+          </View>
+        )}
+        <View style={styles.bottomWrapper}>
+          <View style={styles.category}>
+            <Image style={styles.categoryImage} source={categoryImage} />
+          </View>
+          <View style={styles.bottomContainer}>
+            <Highlight style={styles.title} attribute='name' hit={business} />
+            <Text style={styles.subTitle}>{description}</Text>
+          </View>
         </View>
       </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -9,7 +9,9 @@ import {
 import { Input } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import FeatherIcon from "react-native-vector-icons/Feather";
+
 import ResultTile from "../components/ResultTile";
+import InstantSearch from "../components/InstantSearch";
 
 import colours from "../utils/colours";
 
@@ -42,42 +44,42 @@ const filterByCategory = (businesses, categoryValue) =>
   );
 
 export default function SearchResultsScreen({ navigation, route }) {
-  const { searchInput, category: initialCategory } = route.params;
-  const [businesses, setBusinesses] = useState([]);
-  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
-  const [category, setCategory] = useState(
-    findCategory(categoryData, initialCategory),
-  );
+  // const { searchInput, category: initialCategory } = route.params;
+  // const [businesses, setBusinesses] = useState([]);
+  // const [filteredBusinesses, setFilteredBusinesses] = useState([]);
+  // const [category, setCategory] = useState(
+  //   findCategory(categoryData, initialCategory),
+  // );
 
-  useEffect(() => {
-    const fetchBusinesses = async () => {
-      const results = await fetch(BUSINESS_ENDPOINT);
-      const parsed = await results.json();
-      setBusinesses(parsed);
-      initialCategory
-        ? setFilteredBusinesses(filterByCategory(parsed, initialCategory))
-        : setFilteredBusinesses(parsed);
-    };
-    fetchBusinesses();
-  }, [setBusinesses, initialCategory]);
+  // useEffect(() => {
+  //   const fetchBusinesses = async () => {
+  //     const results = await fetch(BUSINESS_ENDPOINT);
+  //     const parsed = await results.json();
+  //     setBusinesses(parsed);
+  //     initialCategory
+  //       ? setFilteredBusinesses(filterByCategory(parsed, initialCategory))
+  //       : setFilteredBusinesses(parsed);
+  //   };
+  //   fetchBusinesses();
+  // }, [setBusinesses, initialCategory]);
 
-  const handleCategoryChange = selectedCategory => {
-    setCategory(selectedCategory);
-    if (!selectedCategory) {
-      setFilteredBusinesses(businesses);
-      return;
-    }
-    const filtered = businesses.filter(
-      business => business.categories[0].name == selectedCategory.toLowerCase(),
-    );
-    setFilteredBusinesses(filtered);
-  };
+  // const handleCategoryChange = selectedCategory => {
+  //   setCategory(selectedCategory);
+  //   if (!selectedCategory) {
+  //     setFilteredBusinesses(businesses);
+  //     return;
+  //   }
+  //   const filtered = businesses.filter(
+  //     business => business.categories[0].name == selectedCategory.toLowerCase(),
+  //   );
+  //   setFilteredBusinesses(filtered);
+  // };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.paddingContainer}>
         <View style={styles.inputContainer}>
-          <Input
+          {/* <Input
             placeholder='Search by location or business name'
             leftIcon={() => {
               return (
@@ -93,9 +95,10 @@ export default function SearchResultsScreen({ navigation, route }) {
             inputContainerStyle={styles.inputContainerStyle}
           >
             {searchInput ? searchInput : ""}
-          </Input>
+          </Input> */}
+          <InstantSearch />
         </View>
-        <View style={styles.dropDownContainer}>
+        {/* <View style={styles.dropDownContainer}>
           <View style={styles.dropDown}>
             <RNPickerSelect
               placeholder={{}}
@@ -133,8 +136,8 @@ export default function SearchResultsScreen({ navigation, route }) {
               style={pickerSelectStyles}
             />
           </View>
-        </View>
-        {businesses.length > 0 ? (
+        </View> */}
+        {/* {businesses.length > 0 ? (
           <View>
             <Text style={styles.resultsText}>
               {filteredBusinesses.length}{" "}
@@ -150,14 +153,14 @@ export default function SearchResultsScreen({ navigation, route }) {
                   <ResultTile
                     name={business.name}
                     category={business.categories[0].name}
-                    suburb={business.address.suburb}
+                    suburb={business.suburb}
                   />
                 </TouchableOpacity>
               ))}
           </View>
         ) : (
           <Text style={styles.resultsText}>Loading...</Text>
-        )}
+        )} */}
       </View>
     </ScrollView>
   );
