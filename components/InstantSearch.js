@@ -1,9 +1,13 @@
 import React from "react";
 import { View } from "react-native";
 import algoliasearch from "algoliasearch/lite";
-import { InstantSearch as AlgoliaInstantSearch } from "react-instantsearch-native";
+import {
+  InstantSearch as AlgoliaInstantSearch,
+  connectMenu,
+} from "react-instantsearch-native";
 import SearchBox from "./SearchBox";
 import InfiniteHits from "./InfiniteHits";
+import SearchMenu from "../components/SearchMenu";
 
 const searchClient = algoliasearch(
   "TGPZX7CMYY",
@@ -19,6 +23,8 @@ const root = {
   },
 };
 
+const CustomMenu = connectMenu(SearchMenu);
+
 const InstantSearch = () => (
   <AlgoliaInstantSearch
     indexName='prod_business'
@@ -26,6 +32,7 @@ const InstantSearch = () => (
     root={root}
   >
     <SearchBox />
+    <CustomMenu attribute='location.state' resourceName='states' />
     <InfiniteHits />
   </AlgoliaInstantSearch>
 );

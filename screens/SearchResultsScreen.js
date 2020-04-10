@@ -9,6 +9,7 @@ import {
 import { Input } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { connectMenu } from "react-instantsearch-native";
 
 import ResultTile from "../components/ResultTile";
 import InstantSearch from "../components/InstantSearch";
@@ -96,6 +97,7 @@ export default function SearchResultsScreen({ navigation, route }) {
           >
             {searchInput ? searchInput : ""}
           </Input> */}
+
           <InstantSearch />
         </View>
         {/* <View style={styles.dropDownContainer}>
