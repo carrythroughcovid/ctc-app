@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch as AlgoliaInstantSearch,
@@ -32,9 +32,20 @@ const InstantSearch = ({ navigation }) => (
     root={root}
   >
     <SearchBox />
-    <CustomMenu attribute='location.state' resourceName='states' />
+    <View style={styles.horizontal}>
+      <CustomMenu attribute='location.state' resourceName='states' />
+      <CustomMenu attribute='offerings.name' resourceName='offerings' />
+      <CustomMenu attribute='categories.name' resourceName='categories' />
+    </View>
     <InfiniteHits navigation={navigation} />
   </AlgoliaInstantSearch>
 );
+
+const styles = StyleSheet.create({
+  horizontal: {
+    display: "flex",
+    flexDirection: "row",
+  },
+});
 
 export default InstantSearch;
