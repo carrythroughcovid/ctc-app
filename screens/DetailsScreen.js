@@ -17,6 +17,7 @@ export default function DetailsScreen({ route }) {
   const { business } = route.params;
   const headerImage = { uri: business.imgix_images.header_image };
   const logo = { uri: business.imgix_images.logo };
+
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.headerImage} source={headerImage} />
@@ -54,20 +55,10 @@ const styles = StyleSheet.create({
   paddingContainer: {
     paddingHorizontal: 20,
   },
-  textHeading: {
-    fontSize: 30,
-  },
   headerImage: {
     width: "100%",
     height: 240,
     resizeMode: "cover",
-  },
-  logoImageContainer: {
-    backgroundColor: colours.backgroundGrey,
-    borderRadius: 50,
-    padding: 18,
-    width: 60,
-    height: 60,
   },
   logoImage: {
     width: 60,
@@ -97,15 +88,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colours.textUiSecondary,
   },
-  sectionTitle: {
-    color: colours.brandAccent3,
-    fontWeight: "bold",
-    paddingTop: 15,
-    paddingBottom: 5,
-    textTransform: "uppercase",
-    fontFamily: "Oswald Regular",
-    fontSize: 16,
-  },
   actionButton: {
     paddingTop: 12,
     paddingBottom: 14,
@@ -116,31 +98,5 @@ const styles = StyleSheet.create({
   actionButtonTitleStyle: {
     fontSize: 16,
     fontWeight: "bold",
-  },
-  sectionParagraph: {
-    marginBottom: 10,
-    fontSize: 16,
-    lineHeight: 24,
-    color: colours.textUiPrimary,
-  },
-  serviceTilesContainer: {
-    flexWrap: "wrap",
-    flex: 1,
-    flexDirection: "row",
-    marginTop: 5,
-    marginBottom: 15,
-  },
-  serviceTileBox: {
-    marginRight: 10,
-    marginBottom: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    backgroundColor: colours.brandAccent1,
-    borderRadius: 20,
-  },
-  serviceTileText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#FFFFFF",
   },
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions, Text, StyleSheet, View } from "react-native";
-import { TabView, TabBar, SceneMap } from "react-native-tab-view";
+import { TabView, TabBar } from "react-native-tab-view";
 import { capitalize } from "lodash";
 
 import colours from "../utils/colours";
@@ -8,6 +8,9 @@ import colours from "../utils/colours";
 const UpdatesRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
+      <View style={styles.headlineContainer}>
+        <Text style={styles.headline}>{business.headline}</Text>
+      </View>
       <Text style={styles.sectionTitle}>Current Services</Text>
       <View style={styles.serviceTilesContainer}>
         {business.offerings.map(offering => {
@@ -109,6 +112,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
+  },
+  headline: {
+    fontFamily: "Lato",
+    fontSize: 24,
+  },
+  headlineContainer: {
+    paddingVertical: 16,
   },
   tabBarStyle: {
     color: colours.textUiPrimary,
