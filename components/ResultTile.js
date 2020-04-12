@@ -1,24 +1,20 @@
 import React from "react";
-import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
+import { View, Text, ImageBackground, StyleSheet } from "react-native";
 
-import Highlight from "./Highlight";
 import colours from "../utils/colours";
 
-const headerImage = {
-  uri:
-    "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg",
-};
-const categoryImage = {
-  uri:
-    "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
-};
+// const categoryImage = {
+//   uri:
+//     "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
+// };
 
 const ResultTile = ({ business }) => {
-  const { location, categories } = business;
-  const category = categories[0].name;
-  const { suburb } = location;
-
-  const description = "Some quick high-level description about the business.";
+  const {
+    location: { suburb },
+    imgix_images: { header_image },
+    headline,
+  } = business;
+  const headerImage = { uri: header_image };
 
   return (
     <View style={styles.shadow}>
@@ -30,12 +26,12 @@ const ResultTile = ({ business }) => {
           </View>
         )}
         <View style={styles.bottomWrapper}>
-          <View style={styles.category}>
+          {/* <View style={styles.category}>
             <Image style={styles.categoryImage} source={categoryImage} />
-          </View>
+          </View> */}
           <View style={styles.bottomContainer}>
             <Text style={styles.title}>{business.name}</Text>
-            <Text style={styles.subTitle}>{description}</Text>
+            <Text style={styles.subTitle}>{headline}</Text>
           </View>
         </View>
       </View>
@@ -62,6 +58,7 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
     marginLeft: "auto",
     marginRight: "auto",
+    paddingTop: 16,
   },
   image: {
     resizeMode: "cover",
