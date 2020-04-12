@@ -15,26 +15,14 @@ import DetailsTabView from "../components/DetailsTabView";
 
 export default function DetailsScreen({ route }) {
   const { business } = route.params;
+  const headerImage = { uri: business.imgix_images.header_image };
+  const logo = { uri: business.imgix_images.logo };
   return (
     <ScrollView style={styles.container}>
-      <Image
-        style={styles.headerImage}
-        source={{
-          uri:
-            "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg",
-        }}
-      />
+      <Image style={styles.headerImage} source={headerImage} />
       <View style={styles.paddingContainer}>
         <View style={styles.titleContainer}>
-          <View style={styles.logoImageContainer}>
-            <Image
-              style={styles.logoImage}
-              source={{
-                uri:
-                  "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
-              }}
-            />
-          </View>
+          <Image style={styles.logoImage} source={logo} />
           <View style={styles.titleDetailsContainer}>
             <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>
@@ -51,37 +39,7 @@ export default function DetailsScreen({ route }) {
           />
         </View>
       </View>
-      <DetailsTabView />
-      <View style={styles.paddingContainer}>
-        <Text style={styles.sectionTitle}>Current Services</Text>
-        <View style={styles.serviceTilesContainer}>
-          {business.offerings.map(offering => {
-            return (
-              <View style={styles.serviceTileBox} key={offering.name}>
-                <Text style={styles.serviceTileText}>
-                  {capitalize(offering.name)}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-        <View>
-          <Text style={styles.sectionTitle}>Details</Text>
-          <Text style={styles.sectionParagraph}>
-            {business.product_details
-              ? business.product_details
-              : `${business.name.trim()} hasn't provided any information about their product offerings yet.`}
-          </Text>
-        </View>
-        <View>
-          <Text style={styles.sectionTitle}>About</Text>
-          <Text style={styles.sectionParagraph}>
-            {business.business_details
-              ? business.business_details
-              : `${business.name.trim()} hasn't provided any information about their business yet.`}
-          </Text>
-        </View>
-      </View>
+      <DetailsTabView business={business} />
     </ScrollView>
   );
 }
@@ -112,8 +70,8 @@ const styles = StyleSheet.create({
     height: 60,
   },
   logoImage: {
-    width: 24,
-    height: 24,
+    width: 60,
+    height: 60,
   },
   titleContainer: {
     alignItems: "stretch",
