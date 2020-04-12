@@ -25,7 +25,7 @@ const root = {
 
 const CustomMenu = connectMenu(SearchMenu);
 
-const InstantSearch = () => (
+const InstantSearch = ({ navigation }) => (
   <AlgoliaInstantSearch
     indexName='prod_business'
     searchClient={searchClient}
@@ -33,7 +33,7 @@ const InstantSearch = () => (
   >
     <SearchBox />
     <CustomMenu attribute='location.state' resourceName='states' />
-    <InfiniteHits />
+    <InfiniteHits navigation={navigation} />
   </AlgoliaInstantSearch>
 );
 

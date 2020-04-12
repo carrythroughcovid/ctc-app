@@ -39,7 +39,7 @@ export default function DetailsScreen({ route }) {
             <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>
               {capitalize(business.categories[0].name)}
-              {business.address.suburb ? ` · ${business.address.suburb}` : ``}
+              {business.suburb ? ` · ${business.suburb}` : ``}
             </Text>
           </View>
         </View>

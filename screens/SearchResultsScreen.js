@@ -52,53 +52,11 @@ export default function SearchResultsScreen({ navigation, route }) {
   //   findCategory(categoryData, initialCategory),
   // );
 
-  // useEffect(() => {
-  //   const fetchBusinesses = async () => {
-  //     const results = await fetch(BUSINESS_ENDPOINT);
-  //     const parsed = await results.json();
-  //     setBusinesses(parsed);
-  //     initialCategory
-  //       ? setFilteredBusinesses(filterByCategory(parsed, initialCategory))
-  //       : setFilteredBusinesses(parsed);
-  //   };
-  //   fetchBusinesses();
-  // }, [setBusinesses, initialCategory]);
-
-  // const handleCategoryChange = selectedCategory => {
-  //   setCategory(selectedCategory);
-  //   if (!selectedCategory) {
-  //     setFilteredBusinesses(businesses);
-  //     return;
-  //   }
-  //   const filtered = businesses.filter(
-  //     business => business.categories[0].name == selectedCategory.toLowerCase(),
-  //   );
-  //   setFilteredBusinesses(filtered);
-  // };
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.paddingContainer}>
         <View style={styles.inputContainer}>
-          {/* <Input
-            placeholder='Search by location or business name'
-            leftIcon={() => {
-              return (
-                <FeatherIcon
-                  name='search'
-                  color={colours.textUiPrimary}
-                  size={20}
-                />
-              );
-            }}
-            leftIconContainerStyle={styles.leftIconContainerStyle}
-            inputStyle={styles.inputStyle}
-            inputContainerStyle={styles.inputContainerStyle}
-          >
-            {searchInput ? searchInput : ""}
-          </Input> */}
-
-          <InstantSearch />
+          <InstantSearch navigation={navigation} />
         </View>
         {/* <View style={styles.dropDownContainer}>
           <View style={styles.dropDown}>
