@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Text, StyleSheet, View } from "react-native";
+import { Dimensions, Text, StyleSheet, View, Image } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 import { capitalize } from "lodash";
 
@@ -39,8 +39,26 @@ const UpdatesRoute = ({ business }) => (
 const AboutRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
+      <View style={styles.contactContainer}>
+        <Image
+          style={styles.contactIcon}
+          source={require("../assets/images/phone.png")}
+        />
+        <Text style={styles.contactText}>
+          {business.busines_number || "0400123456"}
+        </Text>
+      </View>
+      <View style={styles.contactContainer}>
+        <Image
+          style={styles.contactIcon}
+          source={require("../assets/images/mail.png")}
+        />
+        <Text style={styles.contactText}>
+          {business.busines_email || "jane@business.com.au"}
+        </Text>
+      </View>
       <View>
-        <Text style={styles.sectionTitle}>About</Text>
+        <Text style={styles.sectionTitle}>Our Story</Text>
         <Text style={styles.sectionParagraph}>
           {business.business_details
             ? business.business_details
@@ -130,12 +148,12 @@ const styles = StyleSheet.create({
     color: colours.textUiPrimary,
   },
   sectionTitle: {
-    color: colours.brandAccent3,
+    color: colours.brand,
     fontWeight: "bold",
     paddingTop: 15,
     paddingBottom: 5,
     textTransform: "uppercase",
-    fontFamily: "Oswald Regular",
+    fontFamily: "Oswald Light",
     fontSize: 16,
   },
   sectionParagraph: {
@@ -163,5 +181,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     color: "#FFFFFF",
+  },
+  contactContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 16,
+  },
+  contactIcon: {
+    width: 24,
+    height: 24,
+  },
+  contactText: {
+    fontFamily: "Lato",
+    fontSize: 16,
+    paddingLeft: 16,
+    color: colours.textUiSecondary,
   },
 });
