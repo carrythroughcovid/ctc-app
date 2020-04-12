@@ -34,7 +34,7 @@ const ResultTile = ({ business }) => {
             <Image style={styles.categoryImage} source={categoryImage} />
           </View>
           <View style={styles.bottomContainer}>
-            <Highlight style={styles.title} attribute='name' hit={business} />
+            <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>{description}</Text>
           </View>
         </View>
