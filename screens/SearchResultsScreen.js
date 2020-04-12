@@ -6,13 +6,9 @@ import colours from "../utils/colours";
 
 export default function SearchResultsScreen({ navigation }) {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.paddingContainer}>
-        <View style={styles.inputContainer}>
-          <InstantSearch navigation={navigation} />
-        </View>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <InstantSearch navigation={navigation} />
+    </View>
   );
 }
 
@@ -21,17 +17,8 @@ SearchResultsScreen.navigationOptions = {};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0,
+    padding: 0,
+    paddingHorizontal: 20,
     backgroundColor: colours.backgroundWhite,
-  },
-  inputContainer: {
-    marginTop: 15,
-    borderRadius: 3,
-    borderWidth: 1,
-    borderColor: colours.backgroundGrey,
-  },
-  paddingContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
   },
 });
