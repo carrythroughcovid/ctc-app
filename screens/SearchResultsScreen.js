@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import InstantSearch from "../components/InstantSearch";
+import Constants from "expo-constants";
 
 import colours from "../utils/colours";
 
@@ -16,8 +17,8 @@ SearchResultsScreen.navigationOptions = {};
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: Constants.statusBarHeight,
     flex: 1,
-    padding: 0,
     paddingHorizontal: 20,
     backgroundColor: colours.backgroundWhite,
   },
