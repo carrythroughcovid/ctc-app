@@ -34,6 +34,7 @@ async function loadResourcesAsync() {
     Font.loadAsync({
       ...Ionicons.font,
       "Oswald Regular": require("./assets/fonts/oswald/Oswald-Regular.ttf"),
+      Lato: require("./assets/fonts/lato/Lato-Regular.ttf"),
     }),
   ]);
 }
