@@ -15,16 +15,17 @@ const DiscoverStack = createStackNavigator();
 function DiscoverStackScreen() {
   return (
     <DiscoverStack.Navigator>
-      <DiscoverStack.Screen
+      {/* <DiscoverStack.Screen
         name='Discover'
         component={DiscoverScreen}
         options={{ headerTitle: "" }}
-      />
+      /> */}
       <DiscoverStack.Screen
         name='SearchResults'
         component={SearchResultsScreen}
         options={{
           headerTitle: "",
+          headerShown: false,
         }}
       />
       <DiscoverStack.Screen
