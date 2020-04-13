@@ -39,7 +39,7 @@ const UpdatesRoute = ({ business }) => (
 const AboutRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
-      {business.business_number && (
+      {!!business.business_number && (
         <View style={styles.contactContainer}>
           <Image
             style={styles.contactIcon}
@@ -50,7 +50,7 @@ const AboutRoute = ({ business }) => (
           </Text>
         </View>
       )}
-      {business.business_email && (
+      {!!business.business_email && (
         <View style={styles.contactContainer}>
           <Image
             style={styles.contactIcon}

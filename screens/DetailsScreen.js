@@ -6,6 +6,7 @@ import {
   Image,
   View,
   ScrollView,
+  Linking,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { capitalize } from "lodash";
@@ -32,13 +33,16 @@ export default function DetailsScreen({ route }) {
             </Text>
           </View>
         </View>
-        <View styles={styles.actionButtonContainer}>
-          <Button
-            title='Visit our website'
-            buttonStyle={styles.actionButton}
-            titleStyle={styles.actionButtonTitleStyle}
-          />
-        </View>
+        {!!business.website && (
+          <View styles={styles.actionButtonContainer}>
+            <Button
+              title='Visit our website'
+              buttonStyle={styles.actionButton}
+              titleStyle={styles.actionButtonTitleStyle}
+              onPress={() => Linking.openURL(business.website)}
+            />
+          </View>
+        )}
       </View>
       <DetailsTabView business={business} />
     </ScrollView>
