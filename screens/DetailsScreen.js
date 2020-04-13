@@ -17,14 +17,19 @@ import DetailsTabView from "../components/DetailsTabView";
 export default function DetailsScreen({ route }) {
   const { business } = route.params;
   const headerImage = { uri: business.imgix_images.header_image };
-  const logo = { uri: business.imgix_images.logo };
+  // const logo = { uri: business.imgix_images.logo };
 
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.headerImage} source={headerImage} />
       <View style={styles.paddingContainer}>
         <View style={styles.titleContainer}>
-          <Image style={styles.logoImage} source={logo} />
+          {!!business.imgix_images.logo && (
+            <Image
+              style={styles.logoImage}
+              source={{ uri: business.imgix_images.logo }}
+            />
+          )}
           <View style={styles.titleDetailsContainer}>
             <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>
