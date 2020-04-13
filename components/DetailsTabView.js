@@ -39,24 +39,28 @@ const UpdatesRoute = ({ business }) => (
 const AboutRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
-      <View style={styles.contactContainer}>
-        <Image
-          style={styles.contactIcon}
-          source={require("../assets/images/phone.png")}
-        />
-        <Text style={styles.contactText}>
-          {business.busines_number || "0400123456"}
-        </Text>
-      </View>
-      <View style={styles.contactContainer}>
-        <Image
-          style={styles.contactIcon}
-          source={require("../assets/images/mail.png")}
-        />
-        <Text style={styles.contactText}>
-          {business.busines_email || "jane@business.com.au"}
-        </Text>
-      </View>
+      {business.business_number && (
+        <View style={styles.contactContainer}>
+          <Image
+            style={styles.contactIcon}
+            source={require("../assets/images/phone.png")}
+          />
+          <Text style={styles.contactText}>
+            {business.business_number || "0400123456"}
+          </Text>
+        </View>
+      )}
+      {business.business_email && (
+        <View style={styles.contactContainer}>
+          <Image
+            style={styles.contactIcon}
+            source={require("../assets/images/mail.png")}
+          />
+          <Text style={styles.contactText}>
+            {business.business_email || "jane@business.com.au"}
+          </Text>
+        </View>
+      )}
       <View>
         <Text style={styles.sectionTitle}>Our Story</Text>
         <Text style={styles.sectionParagraph}>
@@ -136,7 +140,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   headlineContainer: {
-    paddingVertical: 16,
+    paddingBottom: 16,
+    paddingTop: 32,
   },
   tabBarStyle: {
     color: colours.textUiPrimary,
