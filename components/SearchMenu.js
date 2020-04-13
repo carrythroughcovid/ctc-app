@@ -7,6 +7,7 @@ const SearchMenu = ({ options, currentRefinement, refine }) => {
   return (
     <View style={styles.pickerContainer}>
       <RNPickerSelect
+        placeholder={{ label: "All", value: "" }}
         value={currentRefinement}
         onValueChange={val => refine(val)}
         items={options}
