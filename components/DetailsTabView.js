@@ -1,5 +1,13 @@
 import React from "react";
-import { Dimensions, Text, StyleSheet, View, Image } from "react-native";
+import {
+  Dimensions,
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 import { capitalize } from "lodash";
 
@@ -40,7 +48,10 @@ const AboutRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
       {!!business.business_number && (
-        <View style={styles.contactContainer}>
+        <TouchableOpacity
+          style={styles.contactContainer}
+          onPress={() => Linking.openURL(`tel:${business.business_number}`)}
+        >
           <Image
             style={styles.contactIcon}
             source={require("../assets/images/phone.png")}
@@ -48,10 +59,13 @@ const AboutRoute = ({ business }) => (
           <Text style={styles.contactText}>
             {business.business_number || "0400123456"}
           </Text>
-        </View>
+        </TouchableOpacity>
       )}
       {!!business.business_email && (
-        <View style={styles.contactContainer}>
+        <TouchableOpacity
+          style={styles.contactContainer}
+          onPress={() => Linking.openURL(`mailto:${business.business_email}`)}
+        >
           <Image
             style={styles.contactIcon}
             source={require("../assets/images/mail.png")}
@@ -59,7 +73,7 @@ const AboutRoute = ({ business }) => (
           <Text style={styles.contactText}>
             {business.business_email || "jane@business.com.au"}
           </Text>
-        </View>
+        </TouchableOpacity>
       )}
       <View>
         <Text style={styles.sectionTitle}>Our Story</Text>
