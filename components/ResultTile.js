@@ -19,7 +19,7 @@ const ResultTile = ({ business }) => {
   const headerImage = { uri: header_image };
 
   return (
-    <View>
+    <View style={styles.wrapper}>
       <View style={styles.container}>
         {header_image ? (
           <ImageBackground source={headerImage} style={styles.image} />
@@ -54,10 +54,19 @@ const ResultTile = ({ business }) => {
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    shadowColor: "grey",
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+  },
   container: {
+    elevation: 5,
     overflow: "hidden",
     borderRadius: 5,
-    elevation: 5,
     position: "relative",
   },
   bottomWrapper: {
