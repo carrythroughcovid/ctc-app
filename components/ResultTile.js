@@ -21,7 +21,14 @@ const ResultTile = ({ business }) => {
   return (
     <View>
       <View style={styles.container}>
-        <ImageBackground source={headerImage} style={styles.image} />
+        {header_image ? (
+          <ImageBackground source={headerImage} style={styles.image} />
+        ) : (
+          <ImageBackground
+            source={require("../assets/images/default_header.png")}
+            style={styles.image}
+          />
+        )}
         {!!suburb && (
           <View style={styles.suburb}>
             <Text style={styles.labelText}>{suburb}</Text>

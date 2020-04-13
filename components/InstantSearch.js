@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch as AlgoliaInstantSearch,
@@ -14,32 +14,51 @@ const searchClient = algoliasearch(
   "859c34030d228a6188c83731bb6e456f",
 );
 
-const root = {
-  Root: View,
-  props: {
-    style: {
-      flex: 1,
-    },
-  },
-};
-
 const CustomMenu = connectMenu(SearchMenu);
 
-const InstantSearch = ({ navigation }) => (
-  <AlgoliaInstantSearch
-    indexName='prod_business'
-    searchClient={searchClient}
-    root={root}
-  >
-    <SearchBox />
-    <View style={styles.horizontal}>
-      <CustomMenu attribute='location.state' resourceName='states' />
-      <CustomMenu attribute='offerings.name' resourceName='offerings' />
-      <CustomMenu attribute='categories.name' resourceName='categories' />
-    </View>
-    <InfiniteHits navigation={navigation} />
-  </AlgoliaInstantSearch>
-);
+const states = [
+  { value: "VIC", label: "VIC" },
+  { value: "SA", label: "SA" },
+  { value: "NSW", label: "NSW" },
+  { value: "TAS", label: "TAS" },
+];
+
+const offerings = [
+  { value: "credit", label: "Credit" },
+  { value: "discounts", label: "Discounts" },
+  { value: "online", label: "Online" },
+  { value: "delivery", label: "Delivery" },
+  { value: "virtual", label: "Virtual" },
+  { value: "takeaway", label: "Takeaway" },
+  { value: "other", label: "Other" },
+];
+
+const categories = [
+  { value: "hospitality", label: "Hospitality" },
+  { value: "retail", label: "Retail" },
+  { value: "services", label: "Services" },
+  { value: "other", label: "Other" },
+];
+
+const InstantSearch = ({ navigation }) => {
+  return (
+    <AlgoliaInstantSearch
+      indexName='prod_business'
+      searchClient={searchClient}
+      onSearchStateChange={searchState =>
+        console.log("searchstate", searchState)
+      }
+    >
+      <SearchBox />
+      {/* <View style={styles.horizontal}> */}
+      <CustomMenu attribute='location.state' options={states} />
+      <CustomMenu attribute='offerings.name' options={offerings} />
+      <CustomMenu attribute='categories.name' options={categories} />
+      {/* </View> */}
+      <InfiniteHits navigation={navigation} />
+    </AlgoliaInstantSearch>
+  );
+};
 
 const styles = StyleSheet.create({
   horizontal: {
