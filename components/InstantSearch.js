@@ -51,9 +51,21 @@ const InstantSearch = ({ navigation }) => {
     >
       <SearchBox />
       <View style={styles.horizontal}>
-        <CustomMenu attribute='location.state' options={states} />
-        <CustomMenu attribute='offerings.name' options={offerings} />
-        <CustomMenu attribute='categories.name' options={categories} />
+        <CustomMenu
+          filterName='State'
+          attribute='location.state'
+          options={states}
+        />
+        <CustomMenu
+          filterName='Offering'
+          attribute='offerings.name'
+          options={offerings}
+        />
+        <CustomMenu
+          filterName='Category'
+          attribute='categories.name'
+          options={categories}
+        />
       </View>
       <InfiniteHits navigation={navigation} />
     </AlgoliaInstantSearch>
