@@ -13,7 +13,9 @@ const ResultTile = ({ business }) => {
     location: { suburb },
     imgix_images: { header_image },
     headline,
+    categories,
   } = business;
+  const category = categories.length === 0 ? "" : categories[0].name;
   const headerImage = { uri: header_image };
 
   return (
@@ -22,7 +24,12 @@ const ResultTile = ({ business }) => {
         <ImageBackground source={headerImage} style={styles.image} />
         {!!suburb && (
           <View style={styles.suburb}>
-            <Text style={styles.suburbText}>{suburb}</Text>
+            <Text style={styles.labelText}>{suburb}</Text>
+          </View>
+        )}
+        {!!category && (
+          <View style={styles.category}>
+            <Text style={styles.labelText}>{category}</Text>
           </View>
         )}
         <View style={styles.bottomWrapper}>
@@ -111,7 +118,16 @@ const styles = StyleSheet.create({
     backgroundColor: colours.brandAccent3,
     borderRadius: 5,
   },
-  suburbText: {
+  category: {
+    position: "absolute",
+    top: 15,
+    right: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: colours.brandAccent1,
+    borderRadius: 5,
+  },
+  labelText: {
     textTransform: "uppercase",
     letterSpacing: 0.5,
     fontSize: 11,
