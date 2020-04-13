@@ -6,6 +6,7 @@ import {
   Image,
   View,
   ScrollView,
+  Linking,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { capitalize } from "lodash";
@@ -15,73 +16,40 @@ import DetailsTabView from "../components/DetailsTabView";
 
 export default function DetailsScreen({ route }) {
   const { business } = route.params;
+  const headerImage = { uri: business.imgix_images.header_image };
+  // const logo = { uri: business.imgix_images.logo };
+
   return (
     <ScrollView style={styles.container}>
-      <Image
-        style={styles.headerImage}
-        source={{
-          uri:
-            "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg",
-        }}
-      />
+      <Image style={styles.headerImage} source={headerImage} />
       <View style={styles.paddingContainer}>
         <View style={styles.titleContainer}>
-          <View style={styles.logoImageContainer}>
+          {!!business.imgix_images.logo && (
             <Image
               style={styles.logoImage}
-              source={{
-                uri:
-                  "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
-              }}
+              source={{ uri: business.imgix_images.logo }}
             />
-          </View>
+          )}
           <View style={styles.titleDetailsContainer}>
             <Text style={styles.title}>{business.name}</Text>
             <Text style={styles.subTitle}>
               {capitalize(business.categories[0].name)}
-              {business.address.suburb ? ` · ${business.address.suburb}` : ``}
+              {business.suburb ? ` · ${business.suburb}` : ``}
             </Text>
           </View>
         </View>
-        <View styles={styles.actionButtonContainer}>
-          <Button
-            title='Visit our website'
-            buttonStyle={styles.actionButton}
-            titleStyle={styles.actionButtonTitleStyle}
-          />
-        </View>
+        {!!business.website && (
+          <View styles={styles.actionButtonContainer}>
+            <Button
+              title='Visit our website'
+              buttonStyle={styles.actionButton}
+              titleStyle={styles.actionButtonTitleStyle}
+              onPress={() => Linking.openURL(business.website)}
+            />
+          </View>
+        )}
       </View>
-      <DetailsTabView />
-      <View style={styles.paddingContainer}>
-        <Text style={styles.sectionTitle}>Current Services</Text>
-        <View style={styles.serviceTilesContainer}>
-          {business.offerings.map(offering => {
-            return (
-              <View style={styles.serviceTileBox} key={offering.name}>
-                <Text style={styles.serviceTileText}>
-                  {capitalize(offering.name)}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-        <View>
-          <Text style={styles.sectionTitle}>Details</Text>
-          <Text style={styles.sectionParagraph}>
-            {business.product_details
-              ? business.product_details
-              : `${business.name.trim()} hasn't provided any information about their product offerings yet.`}
-          </Text>
-        </View>
-        <View>
-          <Text style={styles.sectionTitle}>About</Text>
-          <Text style={styles.sectionParagraph}>
-            {business.business_details
-              ? business.business_details
-              : `${business.name.trim()} hasn't provided any information about their business yet.`}
-          </Text>
-        </View>
-      </View>
+      <DetailsTabView business={business} />
     </ScrollView>
   );
 }
@@ -96,24 +64,14 @@ const styles = StyleSheet.create({
   paddingContainer: {
     paddingHorizontal: 20,
   },
-  textHeading: {
-    fontSize: 30,
-  },
   headerImage: {
     width: "100%",
     height: 240,
     resizeMode: "cover",
   },
-  logoImageContainer: {
-    backgroundColor: colours.backgroundGrey,
-    borderRadius: 50,
-    padding: 18,
+  logoImage: {
     width: 60,
     height: 60,
-  },
-  logoImage: {
-    width: 24,
-    height: 24,
   },
   titleContainer: {
     alignItems: "stretch",
@@ -139,15 +97,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colours.textUiSecondary,
   },
-  sectionTitle: {
-    color: colours.brandAccent3,
-    fontWeight: "bold",
-    paddingTop: 15,
-    paddingBottom: 5,
-    textTransform: "uppercase",
-    fontFamily: "Oswald Regular",
-    fontSize: 16,
-  },
   actionButton: {
     paddingTop: 12,
     paddingBottom: 14,
@@ -158,31 +107,5 @@ const styles = StyleSheet.create({
   actionButtonTitleStyle: {
     fontSize: 16,
     fontWeight: "bold",
-  },
-  sectionParagraph: {
-    marginBottom: 10,
-    fontSize: 16,
-    lineHeight: 24,
-    color: colours.textUiPrimary,
-  },
-  serviceTilesContainer: {
-    flexWrap: "wrap",
-    flex: 1,
-    flexDirection: "row",
-    marginTop: 5,
-    marginBottom: 15,
-  },
-  serviceTileBox: {
-    marginRight: 10,
-    marginBottom: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    backgroundColor: colours.brandAccent1,
-    borderRadius: 20,
-  },
-  serviceTileText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#FFFFFF",
   },
 });

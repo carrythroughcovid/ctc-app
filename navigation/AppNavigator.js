@@ -1,8 +1,8 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 // import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 // import SignInScreen from '../screens/SignInScreen';
 
-import TabNavigator from './TabNavigator';
+import TabNavigator from "./TabNavigator";
 
 export default createAppContainer(
   createSwitchNavigator(
@@ -14,7 +14,7 @@ export default createAppContainer(
     },
     {
       // TODO: Switch to AuthLoading when backend is ready
-      initialRouteName: 'Main',
-    }
-    )
+      initialRouteName: "Main",
+    },
+  ),
 );

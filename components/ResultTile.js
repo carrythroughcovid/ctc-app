@@ -1,49 +1,72 @@
 import React from "react";
-import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
+import { View, Text, ImageBackground, StyleSheet } from "react-native";
 
 import colours from "../utils/colours";
 
-const headerImage = {
-  uri:
-    "https://www.adpstore.com.au/wp-content/uploads/2017/08/shop-layout-1440x961.jpg",
-};
-const categoryImage = {
-  uri:
-    "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
-};
+// const categoryImage = {
+//   uri:
+//     "https://carrythroughcovid.s3-ap-southeast-2.amazonaws.com/icons/cheeseburger.png",
+// };
 
-const ResultTile = ({
-  name,
-  suburb,
-  category,
-  description = "Some quick high-level description about the business.",
-}) => (
-  <View style={styles.shadow}>
-    <View style={styles.container}>
-      <ImageBackground source={headerImage} style={styles.image} />
-      {suburb && (
-        <View style={styles.suburb}>
-          <Text style={styles.suburbText}>{suburb}</Text>
-        </View>
-      )}
-      <View style={styles.bottomWrapper}>
-        <View style={styles.category}>
-          <Image style={styles.categoryImage} source={categoryImage} />
-        </View>
-        <View style={styles.bottomContainer}>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.subTitle}>{description}</Text>
+const ResultTile = ({ business }) => {
+  const {
+    location: { suburb },
+    imgix_images: { header_image },
+    headline,
+    categories,
+  } = business;
+  const category = categories.length === 0 ? "" : categories[0].name;
+  const headerImage = { uri: header_image };
+
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
+        {header_image ? (
+          <ImageBackground source={headerImage} style={styles.image} />
+        ) : (
+          <ImageBackground
+            source={require("../assets/images/default_header.png")}
+            style={styles.image}
+          />
+        )}
+        {!!suburb && (
+          <View style={styles.suburb}>
+            <Text style={styles.labelText}>{suburb}</Text>
+          </View>
+        )}
+        {!!category && (
+          <View style={styles.category}>
+            <Text style={styles.labelText}>{category}</Text>
+          </View>
+        )}
+        <View style={styles.bottomWrapper}>
+          {/* <View style={styles.category}>
+            <Image style={styles.categoryImage} source={categoryImage} />
+          </View> */}
+          <View style={styles.bottomContainer}>
+            <Text style={styles.title}>{business.name}</Text>
+            <Text style={styles.subTitle}>{headline}</Text>
+          </View>
         </View>
       </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
+  wrapper: {
+    shadowColor: "grey",
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+  },
   container: {
+    elevation: 5,
     overflow: "hidden",
     borderRadius: 5,
-    elevation: 5,
     position: "relative",
   },
   bottomWrapper: {
@@ -58,6 +81,7 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
     marginLeft: "auto",
     marginRight: "auto",
+    paddingTop: 16,
   },
   image: {
     resizeMode: "cover",
@@ -110,7 +134,16 @@ const styles = StyleSheet.create({
     backgroundColor: colours.brandAccent3,
     borderRadius: 5,
   },
-  suburbText: {
+  category: {
+    position: "absolute",
+    top: 15,
+    right: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: colours.brandAccent1,
+    borderRadius: 5,
+  },
+  labelText: {
     textTransform: "uppercase",
     letterSpacing: 0.5,
     fontSize: 11,

@@ -1,40 +1,111 @@
 import React from "react";
-import { Dimensions, Text, StyleSheet, View } from "react-native";
-import { TabView, TabBar, SceneMap } from "react-native-tab-view";
+import {
+  Dimensions,
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
+import { TabView, TabBar } from "react-native-tab-view";
+import { capitalize } from "lodash";
 
 import colours from "../utils/colours";
 
-const UpdatesRoute = () => (
+const UpdatesRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
-      <Text style={styles.sectionTitle}>Updates</Text>
-      <Text style={styles.sectionParagraph}>Something about updates.</Text>
+      <View style={styles.headlineContainer}>
+        <Text style={styles.headline}>{business.headline}</Text>
+      </View>
+      <Text style={styles.sectionTitle}>Current Services</Text>
+      <View style={styles.serviceTilesContainer}>
+        {business.offerings.map(offering => {
+          return (
+            <View style={styles.serviceTileBox} key={offering.name}>
+              <Text style={styles.serviceTileText}>
+                {capitalize(offering.name)}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
+      <Text style={styles.sectionParagraph}>{business.new_products}</Text>
+      <View>
+        <Text style={styles.sectionTitle}>Details</Text>
+        <Text style={styles.sectionParagraph}>
+          {business.product_details
+            ? business.product_details
+            : `${business.name.trim()} hasn't provided any information about their product offerings yet.`}
+        </Text>
+      </View>
     </View>
   </View>
 );
 
-const AboutRoute = () => (
+const AboutRoute = ({ business }) => (
   <View style={styles.scene}>
     <View style={styles.paddingContainer}>
-      <Text style={styles.sectionTitle}>About</Text>
-      <Text style={styles.sectionParagraph}>Something about the company.</Text>
+      {!!business.business_number && (
+        <TouchableOpacity
+          style={styles.contactContainer}
+          onPress={() => Linking.openURL(`tel:${business.business_number}`)}
+        >
+          <Image
+            style={styles.contactIcon}
+            source={require("../assets/images/phone.png")}
+          />
+          <Text style={styles.contactText}>
+            {business.business_number || "0400123456"}
+          </Text>
+        </TouchableOpacity>
+      )}
+      {!!business.business_email && (
+        <TouchableOpacity
+          style={styles.contactContainer}
+          onPress={() => Linking.openURL(`mailto:${business.business_email}`)}
+        >
+          <Image
+            style={styles.contactIcon}
+            source={require("../assets/images/mail.png")}
+          />
+          <Text style={styles.contactText}>
+            {business.business_email || "jane@business.com.au"}
+          </Text>
+        </TouchableOpacity>
+      )}
+      <View>
+        <Text style={styles.sectionTitle}>Our Story</Text>
+        <Text style={styles.sectionParagraph}>
+          {business.business_details
+            ? business.business_details
+            : `${business.name.trim()} hasn't provided any information about their business yet.`}
+        </Text>
+      </View>
     </View>
   </View>
 );
 
 const initialLayout = { width: Dimensions.get("window").width };
 
-export default function DetailsTabView() {
+export default function DetailsTabView({ business }) {
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const routes = [
     { key: "updates", title: "Updates" },
     { key: "about", title: "About us" },
-  ]);
+  ];
 
-  const renderScene = SceneMap({
-    updates: UpdatesRoute,
-    about: AboutRoute,
-  });
+  const renderScene = ({ route }) => {
+    switch (route.key) {
+      case "updates":
+        return <UpdatesRoute business={business} />;
+      case "about":
+        return <AboutRoute business={business} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <TabView
@@ -78,6 +149,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  headline: {
+    fontFamily: "Lato",
+    fontSize: 24,
+  },
+  headlineContainer: {
+    paddingBottom: 16,
+    paddingTop: 32,
+  },
   tabBarStyle: {
     color: colours.textUiPrimary,
   },
@@ -88,12 +167,12 @@ const styles = StyleSheet.create({
     color: colours.textUiPrimary,
   },
   sectionTitle: {
-    color: colours.brandAccent3,
+    color: colours.brand,
     fontWeight: "bold",
     paddingTop: 15,
     paddingBottom: 5,
     textTransform: "uppercase",
-    fontFamily: "Oswald Regular",
+    fontFamily: "Oswald Light",
     fontSize: 16,
   },
   sectionParagraph: {
@@ -101,5 +180,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     color: colours.textUiPrimary,
+  },
+  serviceTilesContainer: {
+    flexWrap: "wrap",
+    flex: 1,
+    flexDirection: "row",
+    marginTop: 5,
+    marginBottom: 15,
+  },
+  serviceTileBox: {
+    marginRight: 10,
+    marginBottom: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    backgroundColor: colours.brandAccent1,
+    borderRadius: 20,
+  },
+  serviceTileText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+  },
+  contactContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 16,
+  },
+  contactIcon: {
+    width: 24,
+    height: 24,
+  },
+  contactText: {
+    fontFamily: "Lato",
+    fontSize: 16,
+    paddingLeft: 16,
+    color: colours.textUiSecondary,
   },
 });
