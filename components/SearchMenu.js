@@ -10,7 +10,11 @@ const SearchMenu = ({ items, currentRefinement, refine, resourceName }) => (
   >
     <Picker.Item label={"All"} />
     {items.map(item => (
-      <Picker.Item label={startCase(item.label)} value={item.value} />
+      <Picker.Item
+        key={item.value}
+        label={startCase(item.label)}
+        value={item.value}
+      />
     ))}
   </Picker>
 );
