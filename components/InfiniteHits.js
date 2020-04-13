@@ -13,6 +13,7 @@ const InfiniteHits = ({ navigation, hits, hasMore, refine }) => (
       <TouchableOpacity
         style={styles.result}
         key={business.objectID}
+        activeOpacity={1}
         onPress={() => navigation.navigate("Details", { business })}
       >
         <ResultTile business={business} />
@@ -23,8 +24,7 @@ const InfiniteHits = ({ navigation, hits, hasMore, refine }) => (
 
 const styles = StyleSheet.create({
   result: {
-    paddingBottom: 10,
-    paddingTop: 10,
+    padding: 10,
   },
 });
 

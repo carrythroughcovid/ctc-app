@@ -17,7 +17,7 @@ const ResultTile = ({ business }) => {
   const headerImage = { uri: header_image };
 
   return (
-    <View style={styles.shadow}>
+    <View>
       <View style={styles.container}>
         <ImageBackground source={headerImage} style={styles.image} />
         {!!suburb && (
