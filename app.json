@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "carry-through-covid-app",
-    "slug": "carry-through-covid-app",
+    "name": "carry-app",
+    "slug": "carry-app",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/ctc_icon.png",
     "splash": {
@@ -19,12 +19,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.carrythroughcovid.ctc",
-      "buildNumber": "1.0.1"
+      "bundleIdentifier": "com.usecarry.ctc",
+      "buildNumber": "1.0.2"
     },
     "android": {
-      "package": "com.carrythroughcovid.ctc",
-      "versionCode": 1
+      "package": "com.usecarry.ctc",
+      "versionCode": 2
     },
     "description": ""
   }

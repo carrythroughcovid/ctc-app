@@ -1,6 +1,6 @@
 # ctc-app
 
-React Native mobile application for Carry Through COVID.
+React Native mobile application for Carry.
 
 ## Getting started
 
