@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import Constants from "expo-constants";
@@ -54,6 +55,22 @@ const AboutScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={[styles.sectionContainer, { backgroundColor: "#292B3C" }]}>
+        <Text style={[styles.sectionTitle, { color: "white" }]}>
+          Are you a small business?
+        </Text>
+        <Text style={darkSectionTextStyle}>
+          Sign up to our platform supporting small businesses through COVID-19.
+        </Text>
+        <TouchableOpacity
+          style={styles.businessSignUpButton}
+          onPress={() =>
+            Linking.openURL("https://carrythroughcovid.com/signup")
+          }
+        >
+          <Text style={styles.businessSignUpText}>Sign up now</Text>
+        </TouchableOpacity>
+      </View>
       <View style={darkSectionStyle}>
         <Image
           style={styles.image}
@@ -138,6 +155,22 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     textDecorationColor: colours.backgroundWhite,
+  },
+  businessSignUpButton: {
+    backgroundColor: colours.brandAccent2,
+    paddingVertical: 16,
+    paddingHorizontal: 64,
+    borderRadius: 5,
+    marginTop: 16,
+    marginBottom: 12,
+  },
+  businessSignUpText: {
+    textAlign: "center",
+    fontFamily: "Oswald Regular",
+    fontSize: 16,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    color: colours.backgroundWhite,
   },
 });
 
