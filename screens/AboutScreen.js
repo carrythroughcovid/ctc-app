@@ -84,7 +84,7 @@ const AboutScreen = () => {
       <View style={criticalSectionStyle}>
         <Text style={lightSectionTitleStyle}>Terms and Conditions</Text>
         <Text style={darkSectionTextStyle}>
-          Click{" "}
+          View our terms and conditions{" "}
           <Text
             style={styles.sectionHyperlink}
             onPress={() =>
@@ -94,8 +94,8 @@ const AboutScreen = () => {
             }
           >
             here
-          </Text>{" "}
-          to view our terms and conditions.
+          </Text>
+          .
         </Text>
       </View>
     </ScrollView>
