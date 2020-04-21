@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 64,
     borderRadius: 5,
     marginTop: 16,
-    marginBottom: 12,
   },
   businessSignUpText: {
     textAlign: "center",
