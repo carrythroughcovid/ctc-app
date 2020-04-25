@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { connectSearchBox } from "react-instantsearch-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 import colours from "../utils/colours";
 
@@ -22,10 +22,10 @@ const SearchBox = ({ currentRefinement, refine }) => (
         placeholder='Search for location or business'
       />
       <TouchableOpacity onPress={() => refine(null)}>
-        <Icon
+        <FeatherIcon
           style={styles.inputIcon}
-          name='times'
-          size={18}
+          name='x'
+          size={24}
           color={colours.textUiTertiary}
         />
       </TouchableOpacity>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputIcon: {
-    marginVertical: 14,
+    marginVertical: 12,
     marginHorizontal: 14,
   },
 });
