@@ -1,5 +1,4 @@
 import * as React from "react";
-// import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,12 +12,11 @@ export const AuthContext = React.createContext();
 
 const Stack = createStackNavigator();
 
-export default function App({ navigation }) {
+export default function App() {
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
         case "RESTORE_TOKEN":
-          // const { accessToken, client, uid } = action
           return {
             ...prevState,
             isLoading: false,
@@ -38,7 +36,6 @@ export default function App({ navigation }) {
           return {
             ...prevState,
             isSignout: true,
-            userToken: null,
             accessToken: null,
             client: null,
             uid: null,
@@ -48,7 +45,6 @@ export default function App({ navigation }) {
     {
       isLoading: true,
       isSignout: false,
-      userToken: null,
       accessToken: null,
       client: null,
       uid: null,
@@ -56,7 +52,6 @@ export default function App({ navigation }) {
   );
 
   React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let accessToken;
       let client;
@@ -66,14 +61,9 @@ export default function App({ navigation }) {
         accessToken = await AsyncStorage.getItem("accessToken");
         client = await AsyncStorage.getItem("client");
         uid = await AsyncStorage.getItem("uid");
-      } catch (e) {
-        // Restoring token failed
+      } catch (error) {
+        console.warn(error);
       }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
       dispatch({ type: "RESTORE_TOKEN", accessToken, client, uid });
     };
 
