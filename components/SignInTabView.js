@@ -27,7 +27,7 @@ const Form = styled(View)`
   width: 80%;
 `
 
-const SignInRoute = ({ navigation }) => {
+const SignInRoute = () => {
   const [username, onChangeUsername] = useState("")
   const [password, onChangePassword] = useState("")
   const [errors, setErrors] = useState([])
@@ -70,37 +70,13 @@ const SignInRoute = ({ navigation }) => {
   )
 };
 
-const CreateRoute = ({ navigation }) => {
+const CreateRoute = () => {
   const [name, onChangeName] = useState("")
   const [username, onChangeUsername] = useState("")
   const [password, onChangePassword] = useState("")
   const [errors, setErrors] = useState([])
 
-  const _signInAsync = async () => {
-    setErrors([])
-    const response = await fetch('https://carrythroughcovid.herokuapp.com/api/auth/sign_in', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: username,
-        password
-      })
-    })
-    const json = await response.json()
-    if (response.status === 200) {
-      const { map } = response.headers
-      await AsyncStorage.setItem("access-token", map["access-token"]);
-      await AsyncStorage.setItem("client", map["client"]);
-      await AsyncStorage.setItem("uid", map["uid"]);
-      navigation.navigate("Main");
-    } else if (response.status === 401) {
-      setErrors(json.errors)
-    } else {
-      setErrors(["An error occurred."])
-    }
-  };
+  const { signUp } = React.useContext(AuthContext);
 
   return (
     <Container>
@@ -143,7 +119,7 @@ const CreateRoute = ({ navigation }) => {
             />
           }
         />
-        <Button title="Sign in" onPress={_signInAsync} />
+        <Button title="Sign Up" onPress={() => signUp({ username, password, name, setErrors })} />
         {errors && errors.map(error => <Text>{error}</Text>)}
       </Form>
     </Container>

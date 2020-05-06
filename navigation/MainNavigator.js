@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import SignInScreen from '../screens/SignInScreen';
 import HomeScreen from "./TabNavigator";
 import { storeTokenInfo } from "../utils/token"
-import { signInAsync, signOutAsync } from "../utils/signIn"
+import { signInAsync, signUpAsync, signOutAsync } from "../utils/signIn"
 
 export const AuthContext = React.createContext();
 
@@ -100,12 +100,17 @@ export default function App({ navigation }) {
         dispatch({ type: 'SIGN_OUT' })
       },
       signUp: async data => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `AsyncStorage`
-        // In the example, we'll use a dummy token
+        const { username, password, name, setErrors } = data;
+        const response = await signUpAsync(username, password, name)
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+        if (response.success) {
+          const { accessToken, client, uid } = response.tokenInfo
+          storeTokenInfo(accessToken, client, uid)
+          dispatch({ type: 'SIGN_IN', accessToken, client, uid });
+        } else {
+          response.errors.forEach(error => console.warn(error))
+          setErrors(response.errors)
+        }
       },
     }),
     []
