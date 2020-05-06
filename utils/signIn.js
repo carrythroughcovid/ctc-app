@@ -1,19 +1,17 @@
 import { getTokenInfo, clearTokenInfo } from "../utils/token";
+import { AUTH_URL } from "../constants/constants";
 
 export const signInAsync = async (email, password) => {
-  const response = await fetch(
-    "https://carrythroughcovid.herokuapp.com/api/auth/sign_in",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+  const response = await fetch(`${AUTH_URL}/sign_in`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
   const json = await response.json();
   if (response.status === 200) {
     const { map } = response.headers;
@@ -42,18 +40,15 @@ export const signInAsync = async (email, password) => {
 export const signOutAsync = async () => {
   const { accessToken, client, uid } = await getTokenInfo();
 
-  const response = await fetch(
-    "https://carrythroughcovid.herokuapp.com/api/auth/sign_out",
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "access-token": accessToken,
-        client: client,
-        uid: uid,
-      },
+  const response = await fetch(`${AUTH_URL}/sign_out`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "access-token": accessToken,
+      client: client,
+      uid: uid,
     },
-  );
+  });
   if (response.status === 200) {
     await clearTokenInfo();
     return { success: true };
@@ -63,20 +58,17 @@ export const signOutAsync = async () => {
 };
 
 export const signUpAsync = async (email, password, name) => {
-  const response = await fetch(
-    "https://carrythroughcovid.herokuapp.com/api/auth",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        name,
-      }),
+  const response = await fetch(`${AUTH_URL}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({
+      email,
+      password,
+      name,
+    }),
+  });
   const json = await response.json();
   if (response.status === 200) {
     const { map } = response.headers;
