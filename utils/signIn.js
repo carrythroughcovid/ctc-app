@@ -1,6 +1,6 @@
 import { getTokenInfo, clearTokenInfo } from "../utils/token";
 
-export const signInAsync = async (username, password) => {
+export const signInAsync = async (email, password) => {
   const response = await fetch(
     "https://carrythroughcovid.herokuapp.com/api/auth/sign_in",
     {
@@ -9,7 +9,7 @@ export const signInAsync = async (username, password) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: username,
+        email,
         password,
       }),
     },
@@ -62,7 +62,7 @@ export const signOutAsync = async () => {
   }
 };
 
-export const signUpAsync = async (username, password, name) => {
+export const signUpAsync = async (email, password, name) => {
   const response = await fetch(
     "https://carrythroughcovid.herokuapp.com/api/auth",
     {
@@ -71,7 +71,7 @@ export const signUpAsync = async (username, password, name) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: username,
+        email,
         password,
         name,
       }),

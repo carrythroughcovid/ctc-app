@@ -73,8 +73,8 @@ export default function App() {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        const { username, password, setErrors } = data;
-        const response = await signInAsync(username, password);
+        const { email, password, setErrors } = data;
+        const response = await signInAsync(email, password);
 
         if (response.success) {
           const { accessToken, client, uid } = response.tokenInfo;
@@ -90,8 +90,8 @@ export default function App() {
         dispatch({ type: "SIGN_OUT" });
       },
       signUp: async data => {
-        const { username, password, name, setErrors } = data;
-        const response = await signUpAsync(username, password, name);
+        const { email, password, name, setErrors } = data;
+        const response = await signUpAsync(email, password, name);
 
         if (response.success) {
           const { accessToken, client, uid } = response.tokenInfo;

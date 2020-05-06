@@ -7,7 +7,7 @@ import { AuthContext } from "../../navigation/MainNavigator";
 
 const SignUpRoute = () => {
   const [name, onChangeName] = useState("");
-  const [username, onChangeUsername] = useState("");
+  const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -22,9 +22,9 @@ const SignUpRoute = () => {
         leftIcon={<Icon name='envelope' size={24} color='grey' />}
       />
       <Input
-        placeholder='Username'
-        onChangeText={text => onChangeUsername(text)}
-        value={username}
+        placeholder='Email'
+        onChangeText={text => onChangeEmail(text)}
+        value={email}
         leftIcon={<Icon name='envelope' size={24} color='grey' />}
       />
       <Input
@@ -36,7 +36,7 @@ const SignUpRoute = () => {
       />
       <Button
         title='Sign Up'
-        onPress={() => signUp({ username, password, name, setErrors })}
+        onPress={() => signUp({ email, password, name, setErrors })}
       />
       {errors && errors.map(error => <Text>{error}</Text>)}
     </>

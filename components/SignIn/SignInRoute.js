@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { AuthContext } from "../../navigation/MainNavigator";
 
 const SignInRoute = () => {
-  const [username, onChangeUsername] = useState("");
+  const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -15,9 +15,9 @@ const SignInRoute = () => {
   return (
     <>
       <Input
-        placeholder='Username'
-        onChangeText={text => onChangeUsername(text)}
-        value={username}
+        placeholder='Email'
+        onChangeText={text => onChangeEmail(text)}
+        value={email}
         leftIcon={<Icon name='envelope' size={24} color='grey' />}
       />
       <Input
@@ -29,7 +29,7 @@ const SignInRoute = () => {
       />
       <Button
         title='Sign in'
-        onPress={() => signIn({ username, password, setErrors })}
+        onPress={() => signIn({ email, password, setErrors })}
       />
       {errors && errors.map(error => <Text>{error}</Text>)}
     </>
