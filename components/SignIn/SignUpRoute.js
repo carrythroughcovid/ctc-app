@@ -19,7 +19,7 @@ const SignUpRoute = () => {
         placeholder='Name'
         onChangeText={text => onChangeName(text)}
         value={name}
-        leftIcon={<Icon name='envelope' size={24} color='grey' />}
+        leftIcon={<Icon name='user-circle' size={24} color='grey' />}
       />
       <Input
         placeholder='Email'
