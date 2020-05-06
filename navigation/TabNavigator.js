@@ -76,39 +76,37 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    // <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name='Discover'
-          component={DiscoverStackScreen}
-          options={{
-            tabBarLabel: "Discover",
-            tabBarIcon: () => (
-              <FeatherIcon name='search' color={"#1A051D"} size={20} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name='About'
-          component={AboutStackScreen}
-          options={{
-            tabBarLabel: "About",
-            tabBarIcon: () => (
-              <FeatherIcon name='info' color={"#1A051D"} size={20} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name='Settings'
-          component={SettingsStackScreen}
-          options={{
-            tabBarLabel: "Settings",
-            tabBarIcon: () => (
-              <FeatherIcon name='info' color={"#1A051D"} size={20} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    // </NavigationContainer>
+    <Tab.Navigator>
+      <Tab.Screen
+        name='Discover'
+        component={DiscoverStackScreen}
+        options={{
+          tabBarLabel: "Discover",
+          tabBarIcon: () => (
+            <FeatherIcon name='search' color={"#1A051D"} size={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='About'
+        component={AboutStackScreen}
+        options={{
+          tabBarLabel: "About",
+          tabBarIcon: () => (
+            <FeatherIcon name='info' color={"#1A051D"} size={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Settings'
+        component={SettingsStackScreen}
+        options={{
+          tabBarLabel: "Settings",
+          tabBarIcon: () => (
+            <FeatherIcon name='info' color={"#1A051D"} size={20} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
