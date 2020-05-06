@@ -111,9 +111,17 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {state.accessToken == null ? (
-            <Stack.Screen name='SignIn' component={SignInScreen} />
+            <Stack.Screen
+              name='SignIn'
+              component={SignInScreen}
+              options={{ headerShown: false }}
+            />
           ) : (
-            <Stack.Screen name='Home' component={HomeScreen} />
+            <Stack.Screen
+              name='Home'
+              component={HomeScreen}
+              options={{ headerShown: false }}
+            />
           )}
         </Stack.Navigator>
       </NavigationContainer>

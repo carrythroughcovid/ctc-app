@@ -1,6 +1,7 @@
 import React from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
+import Constants from "expo-constants";
 
 import colours from "../../utils/colours";
 import SignInRoute from "./SignInRoute";
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
   },
   tabViewStyle: {
     backgroundColor: colours.backgroundWhite,
+    marginTop: Constants.statusBarHeight,
   },
   indicator: {
     height: 3,
