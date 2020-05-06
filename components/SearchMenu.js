@@ -6,7 +6,6 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import colours from "../utils/colours";
 
 const SearchMenu = ({ options, currentRefinement, refine, filterName }) => {
-  console.log("current refinement", currentRefinement);
   return (
     <View style={styles.filterContainer}>
       <Text style={styles.filterText}>{filterName}</Text>

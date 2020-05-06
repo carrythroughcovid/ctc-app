@@ -42,13 +42,7 @@ const categories = [
 
 const InstantSearch = ({ navigation }) => {
   return (
-    <AlgoliaInstantSearch
-      indexName='prod_business'
-      searchClient={searchClient}
-      onSearchStateChange={searchState =>
-        console.log("searchstate", searchState)
-      }
-    >
+    <AlgoliaInstantSearch indexName='prod_business' searchClient={searchClient}>
       <SearchBox />
       <View style={styles.horizontal}>
         <CustomMenu
