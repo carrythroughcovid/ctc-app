@@ -1,13 +1,10 @@
 import React from "react";
-import {
-  Dimensions,
-  StyleSheet,
-} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 
 import colours from "../../utils/colours";
-import SignInRoute from "./SignInRoute"
-import SignUpRoute from "./SignUpRoute"
+import SignInRoute from "./SignInRoute";
+import SignUpRoute from "./SignUpRoute";
 
 const initialLayout = { width: Dimensions.get("window").width };
 

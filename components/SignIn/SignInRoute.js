@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import {
-  Text,
-  Button,
-} from "react-native";
-import { Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from "react";
+import { Text, Button } from "react-native";
+import { Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import { AuthContext } from "../../navigation/MainNavigator";
 
