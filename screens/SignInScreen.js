@@ -24,9 +24,11 @@ const Form = styled(View)`
 const SignInScreen = ({ navigation }) => {
   const [username, onChangeUsername] = useState("")
   const [password, onChangePassword] = useState("")
+  const [errors, setErrors] = useState([])
 
   const _signInAsync = async () => {
-    const response = await fetch('https://carrythroughcovid.herokuapp.com/api/v1/auth/sign_in', {
+    setErrors([])
+    const response = await fetch('https://carrythroughcovid.herokuapp.com/api/auth/sign_in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -36,11 +38,17 @@ const SignInScreen = ({ navigation }) => {
         password
       })
     })
+    const json = await response.json()
     if (response.status === 200) {
-      await AsyncStorage.setItem("userToken", "abc");
+      const { map } = response.headers
+      await AsyncStorage.setItem("access-token", map["access-token"]);
+      await AsyncStorage.setItem("client", map["client"]);
+      await AsyncStorage.setItem("uid", map["uid"]);
       navigation.navigate("AuthLoading");
+    } else if (response.status === 401) {
+      setErrors(json.errors)
     } else {
-      // set some error
+      setErrors(["An error occurred."])
     }
   };
 
@@ -74,6 +82,7 @@ const SignInScreen = ({ navigation }) => {
           }
         />
         <Button title="Sign in" onPress={_signInAsync} />
+        {errors && errors.map(error => <Text>{error}</Text>)}
       </Form>
     </Container>
   )
