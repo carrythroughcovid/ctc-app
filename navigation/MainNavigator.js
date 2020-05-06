@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useReducer, useEffect, useMemo, createContext } from "react";
 import { AsyncStorage } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -8,12 +8,12 @@ import HomeScreen from "./TabNavigator";
 import { storeTokenInfo } from "../utils/token";
 import { signInAsync, signUpAsync, signOutAsync } from "../utils/signIn";
 
-export const AuthContext = React.createContext();
+export const AuthContext = createContext();
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [state, dispatch] = React.useReducer(
+  const [state, dispatch] = useReducer(
     (prevState, action) => {
       switch (action.type) {
         case "RESTORE_TOKEN":
@@ -51,7 +51,7 @@ export default function App() {
     },
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const bootstrapAsync = async () => {
       let accessToken;
       let client;
@@ -70,7 +70,7 @@ export default function App() {
     bootstrapAsync();
   }, []);
 
-  const authContext = React.useMemo(
+  const authContext = useMemo(
     () => ({
       signIn: async data => {
         const { email, password, setErrors } = data;
