@@ -7,6 +7,7 @@ import DiscoverScreen from "../screens/DiscoverScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
 import DetailsScreen from "../screens/DetailsScreen";
 import AboutScreen from "../screens/AboutScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
 import FeatherIcon from "react-native-vector-icons/Feather";
 
@@ -55,11 +56,27 @@ function AboutStackScreen() {
   );
 }
 
+const SettingsStack = createStackNavigator();
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen
+        name='Screen'
+        component={SettingsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </SettingsStack.Navigator>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
           name='Discover'
@@ -81,7 +98,17 @@ export default function App() {
             ),
           }}
         />
+        <Tab.Screen
+          name='Settings'
+          component={SettingsStackScreen}
+          options={{
+            tabBarLabel: "Settings",
+            tabBarIcon: () => (
+              <FeatherIcon name='info' color={"#1A051D"} size={20} />
+            ),
+          }}
+        />
       </Tab.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 }
