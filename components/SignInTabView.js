@@ -34,32 +34,6 @@ const SignInRoute = ({ navigation }) => {
 
   const { signIn } = React.useContext(AuthContext);
 
-  const _signInAsync = async () => {
-    setErrors([])
-    const response = await fetch('https://carrythroughcovid.herokuapp.com/api/auth/sign_in', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: username,
-        password
-      })
-    })
-    const json = await response.json()
-    if (response.status === 200) {
-      const { map } = response.headers
-      await AsyncStorage.setItem("access-token", map["access-token"]);
-      await AsyncStorage.setItem("client", map["client"]);
-      await AsyncStorage.setItem("uid", map["uid"]);
-      // navigation.navigate("Main");
-    } else if (response.status === 401) {
-      setErrors(json.errors)
-    } else {
-      setErrors(["An error occurred."])
-    }
-  };
-
   return (
     <Container>
       <Form>
@@ -89,7 +63,7 @@ const SignInRoute = ({ navigation }) => {
             />
           }
         />
-        <Button title="Sign in" onPress={() => signIn({ username, password })} />
+        <Button title="Sign in" onPress={() => signIn({ username, password, setErrors })} />
         {errors && errors.map(error => <Text>{error}</Text>)}
       </Form>
     </Container>
@@ -228,7 +202,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   tabViewStyle: {
-    backgroundColor: "green",
+    backgroundColor: colours.backgroundWhite,
   },
   indicator: {
     height: 3,

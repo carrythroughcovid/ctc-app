@@ -46,7 +46,7 @@ const SettingsScreen = ({ rootNavigation, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Button title="Log out" onPress={() => signOut()} />
+      <Button title="Log out" onPress={signOut} />
     </ScrollView>
   );
 };
