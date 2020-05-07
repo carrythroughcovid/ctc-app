@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,6 +11,8 @@ import AboutScreen from "../screens/AboutScreen";
 import BusinessSignUpScreen from "../screens/BusinessSignUpScreen";
 
 import FeatherIcon from "react-native-vector-icons/Feather";
+
+import colours from "../utils/colours";
 
 const DiscoverStack = createStackNavigator();
 
@@ -56,7 +59,16 @@ function AboutStackScreen() {
         name='BusinessSignUp'
         component={BusinessSignUpScreen}
         options={{
-          headerShown: false,
+          headerShown: true,
+          title: "",
+          headerStyle: {
+            backgroundColor: colours.textUiPrimary,
+          },
+          headerTintColor: colours.backgroundLilac,
+          headerLeftContainerStyle: {
+            marginBottom: 5,
+            position: "absolute",
+          },
         }}
       />
     </AboutStack.Navigator>
