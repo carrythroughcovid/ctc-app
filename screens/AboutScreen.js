@@ -11,7 +11,7 @@ import {
 import Constants from "expo-constants";
 import colours from "../utils/colours";
 
-const AboutScreen = () => {
+const AboutScreen = ({ navigation }) => {
   const sectionDarkBlue = addStyleTo("sectionContainer", {
     backgroundColor: colours.textUiPrimary,
   });
@@ -35,9 +35,7 @@ const AboutScreen = () => {
         </Text>
         <TouchableOpacity
           style={styles.businessSignUpButton}
-          onPress={() =>
-            Linking.openURL("https://carrythroughcovid.com/signup")
-          }
+          onPress={() => navigation.navigate("BusinessSignUp")}
         >
           <Text style={styles.businessSignUpText}>Sign up now</Text>
         </TouchableOpacity>

@@ -7,6 +7,7 @@ import DiscoverScreen from "../screens/DiscoverScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
 import DetailsScreen from "../screens/DetailsScreen";
 import AboutScreen from "../screens/AboutScreen";
+import BusinessSignUpScreen from "../screens/BusinessSignUpScreen";
 
 import FeatherIcon from "react-native-vector-icons/Feather";
 
@@ -47,6 +48,13 @@ function AboutStackScreen() {
       <AboutStack.Screen
         name='About'
         component={AboutScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AboutStack.Screen
+        name='BusinessSignUp'
+        component={BusinessSignUpScreen}
         options={{
           headerShown: false,
         }}
