@@ -7,6 +7,7 @@ import DiscoverScreen from "../screens/DiscoverScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
 import DetailsScreen from "../screens/DetailsScreen";
 import AboutScreen from "../screens/AboutScreen";
+import PurchaseScreen from "../screens/PurchaseScreen";
 
 import FeatherIcon from "react-native-vector-icons/Feather";
 
@@ -31,6 +32,13 @@ function DiscoverStackScreen() {
       <DiscoverStack.Screen
         name='Details'
         component={DetailsScreen}
+        options={{
+          headerTitle: "",
+        }}
+      />
+      <DiscoverStack.Screen
+        name='Purchase'
+        component={PurchaseScreen}
         options={{
           headerTitle: "",
         }}
