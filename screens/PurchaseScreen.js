@@ -12,7 +12,7 @@ import colours from "../utils/colours";
 const PurchaseScreen = ({ route }) => {
   const { business } = route.params;
 
-  const [product, onChangeProduct] = useState("");
+  const [productDescription, onChangeProductDescription] = useState("");
   const [comment, onChangeComment] = useState("");
   const [purchaseImage, onChangePurchaseImage] = useState(null);
 
@@ -45,6 +45,10 @@ const PurchaseScreen = ({ route }) => {
   };
 
   const submitPurchase = () => {
+    // TODO (Jac):
+    //  - Gather product description, comment, and image
+    //  - Submit to server
+    //  - Transition to social/thank you page
     console.log("submitPurchase");
   };
 
@@ -74,8 +78,8 @@ const PurchaseScreen = ({ route }) => {
         <View style={styles.inputContainer}>
           <Input
             placeholder='Almond latte'
-            onChangeText={text => onChangeProduct(text)}
-            value={product}
+            onChangeText={text => onChangeProductDescription(text)}
+            value={productDescription}
           />
         </View>
         <Text style={styles.sectionTitle}>
@@ -83,7 +87,7 @@ const PurchaseScreen = ({ route }) => {
         </Text>
         <View style={styles.inputContainer}>
           <Input
-            placeholder='Best value!'
+            placeholder='Best value for money'
             onChangeText={text => onChangeComment(text)}
             value={comment}
           />
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   inputContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colours.backgroundWhite,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: colours.textUiTertiary,
